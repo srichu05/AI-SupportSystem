@@ -12,6 +12,7 @@ from backend.app.schemas.complaint import (
     EvidenceItem,
     DraftResponse,
     ValidationReport,
+    ToneVariantDraft,
 )
 from backend.app.schemas.review import (
     ReviewDecisionRequest,
@@ -27,6 +28,8 @@ from backend.app.models.complaint import Complaint, ComplaintIssue, IssueEvidenc
 from backend.app.models.response import ResponseDraft, ReviewDecision
 from backend.app.models.policy import PolicyChunk, PolicyDocument
 from backend.app.services.complaint_analyzer import complaint_analyzer
+from backend.app.services.response_generator import response_generator
+from backend.app.services.response_validator import response_validator
 
 logger = logging.getLogger("complaint_assistant.complaints_api")
 router = APIRouter(prefix="/complaints", tags=["Complaints"])
@@ -41,8 +44,8 @@ router = APIRouter(prefix="/complaints", tags=["Complaints"])
 def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
     """
     Intake a customer complaint, decompose into distinct issues, retrieve policy evidence,
-    classify eligibility status, and persist for human review.
-    Draft generation is implemented in Phase 4.
+    classify eligibility status, generate an evidence-grounded draft response, validate
+    commitments and citations deterministically, and persist for human review.
     """
     complaint_id = uuid.uuid4()
     draft_id = uuid.uuid4()
@@ -51,11 +54,17 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
     issues_responses: List[ComplaintIssueResponse] = []
     security_warnings: List[str] = []
     overall_status = "needs_human_review"
+    draft_text = ""
+    citations: List[str] = []
+    variants_dict: Optional[dict] = None
+    val_valid = True
+    val_errors: List[str] = []
+    val_warnings: List[str] = []
 
     if factory is not None:
         try:
             with factory() as db:
-                # Perform Phase 3 decomposition, hybrid retrieval, and policy assessment
+                # Perform decomposition, hybrid retrieval, and policy assessment
                 analysis = complaint_analyzer.analyze_and_persist(
                     complaint_id=complaint_id,
                     complaint_text=request.complaint_text,
@@ -89,17 +98,56 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
                         )
                     )
 
-                # Persist baseline draft shell placeholder for Phase 4
+                # Generate grounded draft in requested primary tone
+                is_adv = any(iss.is_adversarial for iss in analysis.issues)
+                draft_text, citations, val_result = response_generator.generate_draft(
+                    complaint_text=request.complaint_text,
+                    issues=analysis.issues,
+                    tone=request.response_tone,
+                    is_adversarial=is_adv,
+                )
+                val_valid = val_result.valid
+                val_errors = val_result.errors
+                val_warnings = val_result.warnings
+
+                # Generate stretch-goal tone variants if requested
+                if request.generate_tone_variants:
+                    variants_dict = response_generator.generate_variants(
+                        complaint_text=request.complaint_text,
+                        issues=analysis.issues,
+                        is_adversarial=is_adv,
+                    )
+
+                variants_json = (
+                    {k: v.model_dump() for k, v in variants_dict.items()}
+                    if variants_dict
+                    else None
+                )
+
+                # Persist generated draft
                 db_draft = ResponseDraft(
                     id=draft_id,
                     complaint_id=complaint_id,
-                    draft_text=(
-                        "Analysis complete. Issues decomposed, policy evidence retrieved, "
-                        "and status classified. Awaiting Phase 4 evidence-grounded drafting."
-                    ),
-                    validation_status="valid",
+                    draft_text=draft_text,
+                    structured_output={
+                        "citations": citations,
+                        "tone": request.response_tone,
+                        "variants": variants_json,
+                    },
+                    validation_status="valid" if val_valid else "invalid",
                 )
                 db.add(db_draft)
+
+                # Set workflow status based on validation and policy assessment
+                if not val_valid or is_adv or overall_status in ("needs_human_review", "conflict"):
+                    overall_status = "needs_human_review"
+                elif overall_status == "covered":
+                    overall_status = "drafted"
+
+                complaint_rec = db.query(Complaint).filter(Complaint.id == complaint_id).first()
+                if complaint_rec:
+                    complaint_rec.processing_status = overall_status
+
                 db.commit()
 
         except Exception as exc:
@@ -111,6 +159,7 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
             decomposed = complaint_analyzer.decompose_complaint(request.complaint_text, is_adv)
             for iss in decomposed:
                 st, rsn = complaint_analyzer.assess_issue_policy(iss, [], request.complaint_text)
+                iss.assessment_status = st
                 issues_responses.append(
                     ComplaintIssueResponse(
                         issue_id=str(iss.issue_id),
@@ -121,6 +170,23 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
                         evidence=[],
                     )
                 )
+
+            draft_text, citations, val_result = response_generator.generate_draft(
+                complaint_text=request.complaint_text,
+                issues=decomposed,
+                tone=request.response_tone,
+                is_adversarial=is_adv,
+            )
+            val_valid = val_result.valid
+            val_errors = val_result.errors
+            val_warnings = val_result.warnings
+
+            if request.generate_tone_variants:
+                variants_dict = response_generator.generate_variants(
+                    complaint_text=request.complaint_text,
+                    issues=decomposed,
+                    is_adversarial=is_adv,
+                )
     else:
         # Fallback when database factory is unconfigured
         is_adv, adv_w = complaint_analyzer.detect_adversarial_patterns(request.complaint_text)
@@ -129,6 +195,7 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
         decomposed = complaint_analyzer.decompose_complaint(request.complaint_text, is_adv)
         for iss in decomposed:
             st, rsn = complaint_analyzer.assess_issue_policy(iss, [], request.complaint_text)
+            iss.assessment_status = st
             issues_responses.append(
                 ComplaintIssueResponse(
                     issue_id=str(iss.issue_id),
@@ -140,23 +207,38 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
                 )
             )
 
+        draft_text, citations, val_result = response_generator.generate_draft(
+            complaint_text=request.complaint_text,
+            issues=decomposed,
+            tone=request.response_tone,
+            is_adversarial=is_adv,
+        )
+        val_valid = val_result.valid
+        val_errors = val_result.errors
+        val_warnings = val_result.warnings
+
+        if request.generate_tone_variants:
+            variants_dict = response_generator.generate_variants(
+                complaint_text=request.complaint_text,
+                issues=decomposed,
+                is_adversarial=is_adv,
+            )
+
     return ComplaintResponse(
         complaint_id=str(complaint_id),
         status=overall_status,
         issues=issues_responses,
         draft=DraftResponse(
             draft_id=str(draft_id),
-            text=(
-                "Analysis complete. Issues decomposed, policy evidence retrieved, "
-                "and status classified. Awaiting Phase 4 evidence-grounded drafting."
-            ),
-            citations=[],
+            text=draft_text,
+            citations=citations,
         ),
         validation=ValidationReport(
-            valid=True,
-            errors=[],
-            warnings=security_warnings,
+            valid=val_valid,
+            errors=val_errors,
+            warnings=security_warnings + val_warnings,
         ),
+        draft_variants=variants_dict,
     )
 
 
@@ -222,11 +304,28 @@ def get_complaint(complaint_id: str) -> ComplaintResponse:
                         .first()
                     )
                     draft_resp = None
+                    draft_variants = None
+                    val_report = ValidationReport(valid=True, errors=[], warnings=[])
+
                     if latest_draft:
+                        so = latest_draft.structured_output or {}
+                        cites = so.get("citations", [])
+                        raw_vars = so.get("variants")
+                        if raw_vars:
+                            draft_variants = {
+                                k: ToneVariantDraft(**v) if isinstance(v, dict) else v
+                                for k, v in raw_vars.items()
+                            }
                         draft_resp = DraftResponse(
                             draft_id=str(latest_draft.id),
                             text=latest_draft.draft_text,
-                            citations=[],
+                            citations=cites,
+                        )
+                        is_valid = latest_draft.validation_status == "valid"
+                        val_report = ValidationReport(
+                            valid=is_valid,
+                            errors=[] if is_valid else ["Validation flagged draft as invalid."],
+                            warnings=[],
                         )
 
                     return ComplaintResponse(
@@ -234,7 +333,8 @@ def get_complaint(complaint_id: str) -> ComplaintResponse:
                         status=complaint.processing_status,
                         issues=issues_responses,
                         draft=draft_resp,
-                        validation=ValidationReport(valid=True, errors=[], warnings=[]),
+                        validation=val_report,
+                        draft_variants=draft_variants,
                     )
         except Exception as exc:
             logger.error("Failed to fetch complaint %s: %s", complaint_id, exc)
@@ -277,6 +377,17 @@ def record_review_decision(
                         draft_uuid = uuid.UUID(request.draft_id)
                     except ValueError:
                         pass
+
+                # If reviewer edited the final response text, optionally validate and record
+                if request.final_response_text:
+                    db_edited_draft = ResponseDraft(
+                        id=uuid.uuid4(),
+                        complaint_id=parsed_complaint_id,
+                        draft_text=request.final_response_text,
+                        structured_output={"edited_by": "human_reviewer"},
+                        validation_status="valid",
+                    )
+                    db.add(db_edited_draft)
 
                 db_decision = ReviewDecision(
                     id=decision_id,
@@ -335,8 +446,13 @@ def get_complaint_history(complaint_id: str) -> ComplaintHistoryResponse:
                 if complaint:
                     drafts = db.query(ResponseDraft).filter(ResponseDraft.complaint_id == parsed_id).all()
                     for d in drafts:
+                        so = d.structured_output or {}
                         draft_responses.append(
-                            DraftResponse(draft_id=str(d.id), text=d.draft_text, citations=[])
+                            DraftResponse(
+                                draft_id=str(d.id),
+                                text=d.draft_text,
+                                citations=so.get("citations", []),
+                            )
                         )
 
                     decisions = (

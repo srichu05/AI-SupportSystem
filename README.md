@@ -117,13 +117,17 @@ python backend/scripts/verify_db.py
 python -m pytest backend/tests -v
 ```
 
-Automated tests cover:
+Automated tests (75 total test cases) cover:
 - FastAPI startup and life-cycle events
 - Health endpoints (`/health`, `/health/db`, `/health/providers`)
 - Policy extraction, heading-aware chunking, and file validation
 - Hybrid retrieval (pgvector + FTS) and Reciprocal Rank Fusion
 - Complaint analysis, PII masking, and prompt injection defense
 - Policy status classification (`covered`, `prohibited`, `conflict`, `needs_human_review`)
+- Evidence-grounded response drafting and citation verification
+- Deterministic response validation (commitment checking, monetary invention prevention, citation validation)
+- Tone variation consistency (`professional`, `empathetic`, `concise`)
+- Human review workflow (approve, reject, escalate, edit audit history, and customer dispatch invariant)
 - API contracts and Pydantic schemas
 - Database models, unique constraints, and cascade deletes
 - Centralized error envelope formatting and traceback protection
