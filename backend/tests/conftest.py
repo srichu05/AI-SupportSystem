@@ -19,8 +19,21 @@ from backend.app.models import (
 
 @pytest.fixture(scope="session")
 def client() -> Generator[TestClient, None, None]:
-    """Test client fixture for FastAPI application."""
-    with TestClient(app) as test_client:
+    """Test client fixture for FastAPI application configured with default test auth."""
+    import time
+    import jwt
+    test_token = jwt.encode(
+        {
+            "iss": "clerk-test-issuer",
+            "sub": "default_test_agent",
+            "name": "Default Test Agent",
+            "email": "default_agent@test.internal",
+            "exp": int(time.time() + 86400),
+        },
+        "test-secret",
+        algorithm="HS256",
+    )
+    with TestClient(app, headers={"Authorization": f"Bearer {test_token}"}) as test_client:
         yield test_client
 
 
