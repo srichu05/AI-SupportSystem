@@ -33,6 +33,7 @@ class ReviewDecisionResponse(BaseModel):
     final_response_text: Optional[str] = None
     reason: Optional[str] = None
     reviewer_id: Optional[str] = None
+    reviewer_name: Optional[str] = None
     reviewed_at: datetime
 
 
