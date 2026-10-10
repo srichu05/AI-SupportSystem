@@ -1,0 +1,121 @@
+# Source ID: SRC-ZAPPOS-002
+# Title: Conditions of Use | Zappos.com
+# URL: https://www.zappos.com/terms-of-use
+# Retrieved Date: 2026-10-10
+# Extraction Status: success
+# Publisher: Zappos.com LLC
+# Document Type: legal_terms_of_service
+# Intended Use: Grounding risk of loss, transfer of title, product descriptions, arbitration, and disclaimers.
+# ------------------------------------------------------------
+
+## Conditions of Use
+
+Last Updated: June 25, 2026
+
+IMPORTANT NOTICE: THESE CONDITIONS OF USE ARE SUBJECT TO BINDING ARBITRATION AND A WAIVER OF CLASS ACTION RIGHTS AS DETAILED IN THE DISPUTE RESOLUTION SECTION BELOW.
+
+Welcome! Zappos.com LLC and/or its subsidiaries (collectively, "Zappos") provide website features, products and services to you when you visit or shop at Zappos.com, or use other Zappos products, services, websites or mobile applications (collectively with Zappos.com, "Zappos Services") – all of which are subject to these Conditions of Use. We reserve the right to modify these Conditions of Use at any time and without notice to you. By visiting Zappos.com or using other Zappos Services, you agree to these Conditions of Use. Please read them carefully .
+
+We may offer a wide range of Zappos Services, and sometimes additional terms may apply. When you use a Zappos Service (for example, Zappos mobile applications) you also will be subject to the guidelines, terms and agreements applicable to that particular Zappos Service ("Service Terms"). If any Service Terms are inconsistent with these Conditions of Use, the Service Terms will control.
+
+## LICENSE AND ACCESS
+
+Subject to your full compliance with these Conditions of Use and any applicable Service Terms, and your payment of any applicable fees, Zappos grants you a limited, non-exclusive, non-transferable, non-sublicensable and fully revocable license to access and make personal, non-commercial use of the Zappos Services. For Zappos.com specifically, the license to access Zappos.com is solely for the purpose of shopping for items for personal use sold on Zappos.com and not for any commercial use or use on behalf of any third party, except as explicitly permitted by us in advance and in our sole discretion. The license granted herein does not include: any resale or commercial use of any Zappos Service, or its contents; any collection or use of any product listings, descriptions, images, or prices; any derivative use of any Zappos Service or its contents; any downloading, copying, or other use of account information for the benefit of any third party; or any use of data mining, robots (bots), or similar data gathering and extraction tools.
+
+All rights not expressly granted to you in these Conditions of Use or any Service Terms are reserved and retained by Zappos or its licensors, suppliers, publishers, rightsholders, or other content providers. No Zappos Service, nor any part of any Zappos Service, may be reproduced, duplicated, copied, sold, resold, visited, or otherwise exploited for any commercial purpose without express written consent of Zappos. You may not frame or utilize framing techniques to enclose any trademark, logo, or other proprietary information (including images, text, page layout, or form) of Zappos without express written consent. You may not use any meta tags or any other "hidden text" utilizing Zappos’ name or trademarks without the express written consent of Zappos. Zappos reserves the right to refuse service, terminate accounts, and/or cancel orders in our sole discretion, including, without limitation, if we believe that customer conduct violates these Conditions of Use, applicable law, or is harmful to our interests. In other words, you may not misuse Zappos Services .
+
+## INTERNATIONAL ACCESS; SANCTIONS & EXPORT POLICY
+
+Zappos Services may be accessible from countries other than the United States and its territories and may contain products or references to products or services that are not available outside of the United States or its territories. Any such access or reference does not imply that such products or services will be made available outside the United States or its territories. If you access and use Zappos Services outside the United States or its territories, you are responsible for complying with all applicable laws and regulations.
+
+You may not use any Zappos Services if you are the subject of U.S. sanctions or of sanctions consistent with U.S. law imposed by the governments of the country where you are using Zappos Services. You must comply with all U.S. or other export and re-export restrictions that may apply to goods, software (including Zappos software), technology, and services.
+
+## REVIEWS AND COMMENTS
+
+If allowed by Zappos, you may, as applicable, post reviews, comments, photos, videos, and other content; and submit suggestions, ideas, comments, questions, or other material or information (collectively, "Content"), so long as the Content complies with our Community Guidelines and is not otherwise illegal, obscene, threatening, defamatory, invasive of privacy, infringing of intellectual property rights, or otherwise injurious to third parties or objectionable.
+
+If you do post or submit Content, and unless we indicate otherwise, you grant Zappos a nonexclusive, royalty-free, perpetual, irrevocable, and fully sublicensable right to use, reproduce, modify, adapt, publish, perform, translate, create derivative works from, distribute, and display such Content throughout the world in any media. You also grant Zappos and sublicensees the right to use the name that you submit in connection with such Content, if they choose. You represent and warrant that you own or otherwise control all of the rights to the Content that you submit; that the Content is accurate and will not cause injury to any person or entity; and that you will indemnify Zappos for all claims resulting from Content you supply. Zappos has the right but not the obligation to monitor, edit or remove any activity or Content. Zappos takes no responsibility and assumes no liability for any Content posted by you or any third party and may not review posted Content.
+
+## YOUR ACCOUNT
+
+You may need your own Zappos account to use certain Zappos Services, and you may be required to be logged in to the account. You are solely responsible for maintaining the confidentiality of your account and password and for restricting access to your account, and you agree to accept responsibility for all activities that occur under your account or password. You shall immediately notify us of any actual or suspected unauthorized use of your password or Zappos account. We have no obligation to investigate the authorization or source of any such access or use of Zappos Services. Zappos does not sell products or services to children, but we do sell them to adults, who can purchase with a credit card or other permitted payment method. If you are under 18, you may use the Zappos Services only with involvement and permission of a parent or guardian. Zappos reserves the right to refuse service, terminate accounts, terminate your rights to use Zappos Services, remove or edit content, or cancel orders in its sole discretion.
+
+## ELECTRONIC COMMUNICATIONS
+
+When you use Zappos Services, or send e-mails, text messages, and other communications from your desktop or mobile device to us, you may be communicating with us electronically. You consent to receive communications (including marketing communications, unless you have opted-out where applicable) from us electronically, such as e-mails, texts, mobile push notices, or notices and messages on this site or through the other Zappos Services. You agree that all notices, disclosures, agreements, and other communications that we provide to you electronically satisfy any legal requirement that such communication be in writing.
+
+## COPYRIGHT & TRADEMARKS
+
+All content included in or made available through any Zappos Service, such as text, graphics, logos, button icons, images, audio, video, and software is the property of Zappos or its content suppliers; and the compilation of all content included in or made available through any Zappos Service is the exclusive property of Zappos and is protected by United States and international copyright laws, as applicable. In addition, graphics, logos, page headers, button icons, scripts, and service names included in or made available through any Zappos Service are trademarks or trade dress of Zappos in the U.S. and other countries. The use of any of our intellectual property without our express written consent is strictly prohibited. Zappos’ trademarks, trade dress and other intellectual property may not be used in connection with any product or service that is not Zappos’ or in any manner that is likely to cause confusion among customers. All other trademarks not owned by Zappos that appear in any Zappos Service are the property of their respective owners, who may or may not be affiliated with, connected to, or sponsored by Zappos. You may not use any of our trademarks or service marks in meta tags without our prior explicit consent.
+
+## INFRINGEMENT COMPLAINTS
+
+We respect the intellectual property of others. If you believe that your intellectual property rights are being infringed, please follow our Notice and Procedure for Making Claims of Copyright Infringement .
+
+## PRIVACY
+
+Please review our Privacy Notice, which explains our practices and also governs your use of Zappos Services. Our Privacy Notice is available here .
+
+## RISK OF LOSS, RETURNS/REFUNDS & TITLE
+
+The risk of loss and title for items purchased by you from Zappos pass to you upon our delivery of the items to the carrier. Conversely, we do not take title to returned items until the item is received at our fulfillment center. At our discretion, a refund may be issued without requiring a return. In this situation, we do not take title to the refunded item. You are responsible for reviewing the contents of your returns prior to shipment back to us. We are not responsible for any additional items that might accompany your returned items. Any such items are subject to destruction, and we have no obligation to return them to you. For more information about refunds and returns, please see our Shipping & Return Policy .
+
+## PRODUCT DESCRIPTIONS; TYPOGRAPHICAL ERRORS; SITE CONTENT
+
+Zappos attempts to be as accurate as possible. However, Zappos does not warrant that product descriptions or other content of any Zappos Service is 100% accurate, complete, reliable, current, or error-free. If a product offered by Zappos is not as described, your sole remedy against us is to return it in unused condition and request a refund for such item. If any other Zappos Service is not as described, your sole remedy against us is to request a refund for such Zappos Service.
+
+In the event a product or service is listed at an incorrect price or with incorrect information (due to typographical error or error in pricing or product information received from our suppliers), we shall have the right to refuse or cancel any orders placed for such product or service. We shall have the right to refuse or cancel any such orders whether or not the order has been confirmed and your credit card charged. If your credit card has already been charged for the purchase and your order is canceled, we will issue a credit to your credit card account in the amount of the charge.
+
+Content provided on Zappos.com is solely for informational purposes. It is your sole responsibility to consult a licensed physician or qualified health care professional for advice, diagnosis, and/or treatment of any health related condition or before engaging in any physical activity using our products or services. User submissions or opinions expressed on Zappos Services are that of the individual expressing such submission or opinion and may not reflect our opinions. Product representations expressed on Zappos.com are that of the vendor and are not made by us, unless otherwise noted.
+
+Our websites may contain links or ads to other sites that are owned and operated by third parties. You acknowledge that we are not responsible for the operation of, or content located on or through, any such site, and the inclusion of third party sites does not imply endorsement by Zappos.
+
+## TERMINATION AND EFFECT OF TERMINATION
+
+In addition to any other legal or equitable remedies, we may, without prior notice to you, immediately terminate or revoke any or all of your permissions granted under these Conditions of Use. Upon such termination or revocation, you shall immediately cease all access to and use of all Zappos Services, and we shall, in addition to any other legal or equitable remedies, immediately revoke all password(s) and account identification issued to you and deny your access to and use of Zappos.com or any other Zappos website in whole or in part. Any termination of these Conditions of Use shall not affect the respective rights and obligations (including without limitation, payment obligations) of the parties arising before the date of termination.
+
+## DISCLAIMER AND LIMITATION OF LIABILITY
+
+ZAPPOS SERVICES AND ALL INFORMATION, CONTENT, MATERIALS, PRODUCTS (INCLUDING SOFTWARE) AND OTHER SERVICES INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH ZAPPOS SERVICES ARE PROVIDED BY ZAPPOS ON AN "AS IS" AND "AS AVAILABLE" BASIS, UNLESS OTHERWISE SPECIFIED IN WRITING. ZAPPOS MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF ZAPPOS SERVICES, OR THE INFORMATION, CONTENT, MATERIALS, PRODUCTS (INCLUDING SOFTWARE) OR OTHER SERVICES INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH ZAPPOS SERVICES, UNLESS OTHERWISE SPECIFIED IN WRITING. YOU EXPRESSLY AGREE THAT YOUR USE OF ZAPPOS SERVICES IS AT YOUR SOLE RISK.
+
+TO THE FULL EXTENT PERMISSIBLE BY LAW, ZAPPOS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, DATA ACCURACY, DATA SECURITY, AND IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. ZAPPOS.COM MAY INCLUDE INACCURACIES, MISTAKES OR TYPOGRAPHICAL ERRORS. WE DO NOT WARRANT THAT THE CONTENT WILL BE UNINTERRUPTED OR ERROR FREE. ZAPPOS DOES NOT WARRANT THAT ZAPPOS SERVICES, INFORMATION, CONTENT, MATERIALS, PRODUCTS (INCLUDING SOFTWARE) OR OTHER SERVICES INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH ZAPPOS SERVICES, ZAPPOS’ SERVERS OR ELECTRONIC COMMUNICATIONS SENT FROM ZAPPOS ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. TO THE FULL EXTENT PERMISSIBLE BY LAW, ZAPPOS WILL NOT BE LIABLE FOR ANY DAMAGES OF ANY KIND ARISING FROM THE USE OF ANY ZAPPOS SERVICE, OR FROM ANY INFORMATION, CONTENT, MATERIALS, PRODUCTS (INCLUDING SOFTWARE) OR OTHER SERVICES INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH ANY ZAPPOS SERVICE, INCLUDING, BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, PUNITIVE, AND CONSEQUENTIAL DAMAGES, UNLESS OTHERWISE SPECIFIED IN WRITING.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, OUR TOTAL LIABILITY TO YOU FOR ANY DAMAGES (REGARDLESS OF THE FOUNDATION FOR THE ACTION) SHALL NOT EXCEED IN THE AMOUNT YOU PAID US FOR THE APPLICABLE PRODUCT OR SERVICE.
+
+## DISPUTE RESOLUTION
+
+a. Mandatory Arbitration and Waiver of Class Actions .
+
+YOU AND ZAPPOS AGREE THAT ANY DISPUTE, CONTROVERSY, OR CLAIM BETWEEN YOU AND ZAPPOS ARISING OUT OF, OR RELATING TO (1) THIS AGREEMENT, (2) YOUR PURCHASE OF ANY PRODUCT OR SERVICE FROM ZAPPOS, AND/OR (3) ANY RELATIONSHIP BETWEEN YOU AND ZAPPOS, (EACH OF (1) THROUGH (3), A “DISPUTE”), SHALL BE RESOLVED ONLY BY FINAL AND BINDING ARBITRATION, except that (a) either party may elect to proceed in small claims court in your county of residence within the U.S. if the Dispute qualifies; and (b) this agreement to arbitrate does not include your or Zappos’s right to seek injunctive or other equitable relief in state or federal court in Clark County, Nevada to prevent the actual or threatened infringement, misappropriation or violation of a party’s copyrights, trademarks, trade secrets, patents, or other intellectual property rights. The arbitrator will have the authority to award the same remedies as a court, including preliminary or permanent injunctive relief, public injunctive relief, or equitable relief but only to the extent necessary to provide relief warranted by the individual claim before the arbitrator. The Federal Arbitration Act, 9 U.S.C. §§ 1, et seq., federal arbitration law, and Nevada State law apply to this arbitration agreement and govern all questions as to whether a dispute is subject to arbitration.
+
+b. Notice of Dispute
+
+If you have a dispute that our customer service representatives cannot resolve and you wish to pursue arbitration, you must first complete the following steps before filing an arbitration claim:
+
+1) you must first send an individualized Notice of Dispute to us using this Claim Form . The Notice of Dispute must be personally signed by you, completed accurately and in full, be accompanied by documents reasonably needed to support your claim (e.g., proof of purchase), and sent by regular mail to: Notice of Dispute, Amazon.com, Inc. Attn: General Counsel P.O. Box 81226 Seattle, WA 98108-1226.  We will provide you with a notice of dispute via your account’s primary email address if we have a dispute with you.
+
+2) Upon receipt of a Notice of Dispute, you and Zappos agree to negotiate in good faith for 60 days to try to resolve the dispute.
+
+3) If either side requests a settlement conference during this period, then you and Zappos agree to schedule that conference by phone or video conference and to personally participate in it. Either side can bring counsel, but the conference must be individualized to our dispute, even if counsel represents other parties. For claims covered by the Notice of Dispute, any statute of limitations will be tolled from the date the notice is received until the later of (i) 60 days, or (ii) after a timely requested settlement conference is completed.
+
+A court can enjoin the filing or prosecution of an arbitration in breach of these pre-arbitration dispute resolution requirements. If either party seeks an injunction from a court on this basis, you and Zappos agree that the arbitration (and any obligation to pay arbitration fees) will be stayed until that request is resolved and all appeals exhausted.
+
+Arbitration Process and Procedure
+
+If the parties do not reach an agreed upon solution within sixty (60) days from the original Notice of Dispute, then either party may initiate binding arbitration as the sole means to resolve claims, subject to this Agreement. Arbitration shall: (1) be administered by JAMS pursuant to the JAMS Streamlined Arbitration Rules & Procedures and the JAMS Mass Arbitration Procedures and Guidelines then in effect (together, the “JAMS Rules”); (2) be conducted by a single, neutral arbitrator; and (3) take place in the county where you reside or any other location mutually agreed upon by the parties. The JAMS Policy on Consumer Arbitrations Pursuant to Pre-Dispute Clauses Minimum Standards for Procedural Fairness (the “Minimum Standards”) shall apply, including any minimum standards governing consumer arbitration fees. The arbitrator shall issue a written award that states the disposition of each claim and provides a concise statement of the essential findings and conclusions on which the award is based. You and Zappos each agree that the arbitrator shall have exclusive authority to resolve all disputes arising out of, or relating to, the interpretation, applicability, enforceability, or formation of this Agreement, including whether this arbitration agreement is enforceable and whether a particular claim or demand for relief is subject to arbitration under this Agreement. To the extent that this arbitration agreement conflicts with the Minimum Standards in any way, the Minimum Standards shall take precedence.
+
+YOU AND ZAPPOS EACH AGREE THAT (A) ANY ARBITRATION PROCEEDING FOR ANY DISPUTE WILL NOT BE CONDUCTED IN A CLASS OR REPRESENTATIVE ACTION, AND (B) BY ENTERING INTO THIS AGREEMENT (INCLUDING THIS AGREEMENT TO ARBITRATE), YOU AND ZAPPOS ARE, TO THE MAXIMUM EXTENT PERMITTED BY LAW, WAIVING THE RIGHT TO A TRIAL BY JURY, AND THE RIGHT TO PARTICIPATE IN A CLASS OR REPRESENTATIVE ACTION, WITH RESPECT TO ANY DISPUTE.  NOTWITHSTANDING THE FOREGOING, NOTHING IN THIS AGREEMENT SHALL PREVENT JAMS FROM CONSOLIDATING INDIVIDUAL ARBITRATIONS IN ACCORDANCE WITH ITS RULES AND POLICIES.
+
+If applicable law precludes the parties from arbitrating any claim or demand for relief in a Dispute, then that claim or demand for relief (and only that claim or demand for relief) must be severed from the arbitration and may be brought in state or federal court in Clark County, Nevada. You and Zappos agree that authority to determine whether applicable law precludes arbitrating any particular claim or demand for relief in a Dispute is delegated exclusively to the arbitrator and that if any such claim or demand for relief is severed as a result of the arbitrator’s decision and proceeds in court, then you and Zappos are, to the maximum extent permitted by law, waiving the right to a trial by jury with respect to that claim or demand for relief.
+
+## APPLICABLE LAW
+
+By using any Zappos Service, you agree that applicable federal law, and the laws of the state of Nevada, without regard to principles of conflict of laws, will govern these Conditions of Use and any dispute of any sort that might arise between you and Zappos.
+
+## MODIFICATION & SEVERABILITY
+
+We reserve the right to make changes to our websites, policies, Service Terms, and these Conditions of Use at any time and without notice to you. If any of these conditions shall be deemed invalid, void, or for any reason unenforceable, that condition shall be deemed severable and shall not affect the validity and enforceability of any remaining condition.
+
+## OUR ADDRESS
+
+Zappos.com LLC, 400 E. Stewart Avenue, Las Vegas, NV 89101

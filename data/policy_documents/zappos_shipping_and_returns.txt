@@ -1,0 +1,77 @@
+# Source ID: SRC-ZAPPOS-001
+# Title: Shipping and Returns | Zappos.com
+# URL: https://www.zappos.com/c/shipping-and-returns
+# Retrieved Date: 2026-10-10
+# Extraction Status: success
+# Publisher: Zappos.com LLC
+# Document Type: customer_service_policy
+# Intended Use: Grounding shipping speeds, delivery terms, 60-day return window, and refund processing.
+# ------------------------------------------------------------
+
+## Zappos.com customers enjoy free shipping, free returns, and 24/7 customer service!
+
+## SHIPPING
+
+Last Updated: 09/09/2026. These policies complement and incorporate by reference the Zappos Conditions of Use .
+
+### FREE SHIPPING:
+
+ANYWHERE in the United States including US territories and military APO/FPO addresses
+
+### SHIPPING SPEED:
+
+Zappos VIP members receive free expedited shipping.
+
+EXPEDITED SHIPPING*: 1-3 business day shipping (shipping in 3 business days or less)
+
+*Expedited shipping is not available for shipments outside the continental United States or to military APO/FPO addresses
+
+STANDARD SHIPPING: 3-5 business day shipping (shipping in 5 business days or less)
+
+### RETURNS
+
+### FREE RETURNS: ANYWHERE in the United States including US territories and military APO/FPO addresses
+
+### RETURN POLICY
+
+Merchandise must be returned within 60 days in new condition.
+
+Merchandise must not be worn, used, altered, or washed and in its original packaging with all tags attached, including seals and security tags. Returns must not be damaged, incomplete, or contain items that don't match the original order.
+
+Footwear must include the original shoe box in its original condition, without packing tape or postal labels.
+
+Final Sale items are not eligible to be returned.
+
+Returns that do not comply with this return policy may not be eligible for a refund or could result in a restocking fee up to 50% of the item price.
+
+Note that an item cannot be sent back to you after it has been returned.
+
+### How To Initiate A Return
+
+Start your return online: Go to your Order History within your account within 60 days of receiving your order. Returns for store credit may be accepted after 60 days in limited circumstances, please contact Zappos Customer Service for assistance. Guest accounts are only eligible for returns within 60 days.
+
+Choose refund option: You will be presented a refund option of store credit or original form of payment. Guest accounts will only be eligible for refunds to the original form of payment.
+
+Pack up your items: Merchandise must be returned in the original packaging. No labels or tape on product packaging.
+
+Drop off your package: Select your preferred UPS return method (download QR code or print label), then place items in a shipping box and drop the return package at a UPS location.
+
+### How To Track Your Return
+
+You can track your return in your account Order History.
+
+### When You'll Receive Your Refund
+
+FAST REFUNDS: For eligible orders, your refund will be issued once dropped off and scanned by the return carrier.
+
+Eligible refunds are issued immediately. Please allow up to 24 hours for store credit. Some financial institutions may take up to 10 business days. After Pay may take up to 20 business days and PayPal up to 30 business days.
+
+Refunds for some customers can take up to 30 days. Returns that do not comply with our return policy may not be eligible for a refund or could result in a restocking fee up to 50% of the item price.
+
+Guest checkout customer refunds will only be issued to original form of payment.
+
+Afterpay refunds will be issued only up to the amount paid at the time of return.
+
+If items for which you were issued a refund have not been received by Zappos, a warning email will be sent at 30 days as a reminder of the potential charge. After
+
+45 days, a charge for the items not returned may be applied to the original form of payment.
