@@ -2,7 +2,7 @@ import uuid
 import logging
 from datetime import datetime, timezone
 from typing import Optional, List
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
 from backend.app.schemas.complaint import (
@@ -19,11 +19,17 @@ from backend.app.schemas.review import (
     ReviewDecisionResponse,
     ComplaintHistoryResponse,
 )
+from backend.app.schemas.agent import (
+    ComplaintAssignRequest,
+    ComplaintAuditLogResponse,
+)
 from backend.app.core.errors import (
     ResourceNotFoundException,
     InvalidReviewDecisionException,
 )
-from backend.app.core.database import get_session_factory
+from backend.app.core.database import get_session_factory, get_db
+from backend.app.core.auth import get_current_agent
+from backend.app.models.agent import AgentProfile, ComplaintAuditLog
 from backend.app.models.complaint import Complaint, ComplaintIssue, IssueEvidence
 from backend.app.models.response import ResponseDraft, ReviewDecision
 from backend.app.models.policy import PolicyChunk, PolicyDocument
@@ -41,11 +47,15 @@ router = APIRouter(prefix="/complaints", tags=["Complaints"])
     status_code=status.HTTP_201_CREATED,
     summary="Submit and process a customer complaint",
 )
-def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
+def create_complaint(
+    request: ComplaintCreateRequest,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> ComplaintResponse:
     """
     Intake a customer complaint, decompose into distinct issues, retrieve policy evidence,
     classify eligibility status, generate an evidence-grounded draft response, validate
     commitments and citations deterministically, and persist for human review.
+    Attributed to the authenticated agent derived from Clerk credentials.
     """
     complaint_id = uuid.uuid4()
     draft_id = uuid.uuid4()
@@ -124,7 +134,7 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
                     else None
                 )
 
-                # Persist generated draft
+                # Persist generated draft with creator attribution
                 db_draft = ResponseDraft(
                     id=draft_id,
                     complaint_id=complaint_id,
@@ -135,6 +145,7 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
                         "variants": variants_json,
                     },
                     validation_status="valid" if val_valid else "invalid",
+                    created_by_agent_id=current_agent.id,
                 )
                 db.add(db_draft)
 
@@ -147,7 +158,22 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
                 complaint_rec = db.query(Complaint).filter(Complaint.id == complaint_id).first()
                 if complaint_rec:
                     complaint_rec.processing_status = overall_status
+                    complaint_rec.created_by_agent_id = current_agent.id
+                    complaint_rec.assigned_to_agent_id = current_agent.id
 
+                # Record immutable audit event for creation
+                db_audit = ComplaintAuditLog(
+                    id=uuid.uuid4(),
+                    complaint_id=complaint_id,
+                    actor_agent_id=current_agent.id,
+                    event_type="complaint_created",
+                    details={
+                        "tone": request.response_tone,
+                        "overall_status": overall_status,
+                        "agent_name": current_agent.display_name,
+                    },
+                )
+                db.add(db_audit)
                 db.commit()
 
         except Exception as exc:
@@ -239,7 +265,81 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
             warnings=security_warnings + val_warnings,
         ),
         draft_variants=variants_dict,
+        created_by_agent_id=str(current_agent.id),
+        created_by_agent_name=current_agent.display_name,
+        assigned_to_agent_id=str(current_agent.id),
+        assigned_to_agent_name=current_agent.display_name,
     )
+
+
+@router.get(
+    "",
+    response_model=List[ComplaintResponse],
+    summary="List complaints and their current review status",
+)
+def list_complaints(
+    limit: int = 50,
+    offset: int = 0,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> List[ComplaintResponse]:
+    """
+    List complaints and their current review status.
+    Protected by Clerk authentication.
+    """
+    factory = get_session_factory()
+    results: List[ComplaintResponse] = []
+    if factory is not None:
+        try:
+            with factory() as db:
+                complaints = (
+                    db.query(Complaint)
+                    .order_by(Complaint.created_at.desc())
+                    .offset(offset)
+                    .limit(limit)
+                    .all()
+                )
+                for comp in complaints:
+                    latest_draft = (
+                        db.query(ResponseDraft)
+                        .filter(ResponseDraft.complaint_id == comp.id)
+                        .order_by(ResponseDraft.created_at.desc())
+                        .first()
+                    )
+                    draft_resp = None
+                    if latest_draft:
+                        so = latest_draft.structured_output or {}
+                        draft_resp = DraftResponse(
+                            draft_id=str(latest_draft.id),
+                            text=latest_draft.draft_text,
+                            citations=so.get("citations", []),
+                        )
+
+                    results.append(
+                        ComplaintResponse(
+                            complaint_id=str(comp.id),
+                            status=comp.processing_status,
+                            issues=[
+                                ComplaintIssueResponse(
+                                    issue_id=str(iss.id),
+                                    issue_text=iss.issue_text,
+                                    requested_resolution=iss.requested_resolution,
+                                    assessment_status=iss.assessment_status,
+                                    missing_facts=iss.missing_facts or [],
+                                    evidence=[],
+                                )
+                                for iss in comp.issues
+                            ],
+                            draft=draft_resp,
+                            validation=ValidationReport(valid=True, errors=[], warnings=[]),
+                            created_by_agent_id=str(comp.created_by_agent_id) if comp.created_by_agent_id else None,
+                            created_by_agent_name=comp.created_by.display_name if comp.created_by else None,
+                            assigned_to_agent_id=str(comp.assigned_to_agent_id) if comp.assigned_to_agent_id else None,
+                            assigned_to_agent_name=comp.assigned_to.display_name if comp.assigned_to else None,
+                        )
+                    )
+        except Exception as exc:
+            logger.error("Failed to list complaints: %s", exc)
+    return results
 
 
 @router.get(
@@ -247,9 +347,13 @@ def create_complaint(request: ComplaintCreateRequest) -> ComplaintResponse:
     response_model=ComplaintResponse,
     summary="Retrieve complaint details and review status",
 )
-def get_complaint(complaint_id: str) -> ComplaintResponse:
+def get_complaint(
+    complaint_id: str,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> ComplaintResponse:
     """
     Retrieve an existing complaint, extracted issues, retrieved evidence, and draft.
+    Includes ownership and assignment accountability attributes.
     """
     try:
         parsed_id = uuid.UUID(complaint_id)
@@ -267,7 +371,6 @@ def get_complaint(complaint_id: str) -> ComplaintResponse:
                     issues_responses: List[ComplaintIssueResponse] = []
 
                     for iss in db_issues:
-                        # Fetch linked evidence
                         evidence_links = db.query(IssueEvidence).filter(IssueEvidence.issue_id == iss.id).all()
                         evidence_items: List[EvidenceItem] = []
 
@@ -328,6 +431,9 @@ def get_complaint(complaint_id: str) -> ComplaintResponse:
                             warnings=[],
                         )
 
+                    creator_name = complaint.created_by.display_name if complaint.created_by else None
+                    assignee_name = complaint.assigned_to.display_name if complaint.assigned_to else None
+
                     return ComplaintResponse(
                         complaint_id=str(complaint.id),
                         status=complaint.processing_status,
@@ -335,11 +441,83 @@ def get_complaint(complaint_id: str) -> ComplaintResponse:
                         draft=draft_resp,
                         validation=val_report,
                         draft_variants=draft_variants,
+                        created_by_agent_id=str(complaint.created_by_agent_id) if complaint.created_by_agent_id else None,
+                        created_by_agent_name=creator_name,
+                        assigned_to_agent_id=str(complaint.assigned_to_agent_id) if complaint.assigned_to_agent_id else None,
+                        assigned_to_agent_name=assignee_name,
                     )
         except Exception as exc:
             logger.error("Failed to fetch complaint %s: %s", complaint_id, exc)
 
     raise ResourceNotFoundException("complaint", complaint_id)
+
+
+@router.post(
+    "/{complaint_id}/assign",
+    response_model=ComplaintResponse,
+    summary="Assign or reassign complaint to a support agent",
+)
+def assign_complaint(
+    complaint_id: str,
+    request: ComplaintAssignRequest,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> ComplaintResponse:
+    """
+    Reassign complaint to a target agent profile.
+    Derives actor identity exclusively from verified Clerk token and records audit event.
+    """
+    try:
+        parsed_complaint_id = uuid.UUID(complaint_id)
+    except ValueError:
+        raise ResourceNotFoundException("complaint", complaint_id)
+
+    try:
+        target_agent_id = uuid.UUID(request.assigned_to_agent_id)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid assigned_to_agent_id format.",
+        )
+
+    factory = get_session_factory()
+    if factory is None:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database factory is unconfigured.",
+        )
+
+    with factory() as db:
+        complaint = db.query(Complaint).filter(Complaint.id == parsed_complaint_id).first()
+        if not complaint:
+            raise ResourceNotFoundException("complaint", complaint_id)
+
+        target_agent = db.query(AgentProfile).filter(AgentProfile.id == target_agent_id).first()
+        if not target_agent or not target_agent.is_active:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Target agent does not exist or has been deactivated.",
+            )
+
+        prev_agent_id = complaint.assigned_to_agent_id
+        complaint.assigned_to_agent_id = target_agent.id
+
+        event_name = "reassigned" if prev_agent_id else "assigned"
+        db_audit = ComplaintAuditLog(
+            id=uuid.uuid4(),
+            complaint_id=parsed_complaint_id,
+            actor_agent_id=current_agent.id,
+            event_type=event_name,
+            details={
+                "from_agent_id": str(prev_agent_id) if prev_agent_id else None,
+                "to_agent_id": str(target_agent.id),
+                "to_agent_name": target_agent.display_name,
+                "assigned_by": current_agent.display_name,
+            },
+        )
+        db.add(db_audit)
+        db.commit()
+
+    return get_complaint(complaint_id=complaint_id, current_agent=current_agent)
 
 
 @router.post(
@@ -351,12 +529,13 @@ def get_complaint(complaint_id: str) -> ComplaintResponse:
 def record_review_decision(
     complaint_id: str,
     request: ReviewDecisionRequest,
+    current_agent: AgentProfile = Depends(get_current_agent),
 ) -> ReviewDecisionResponse:
     """
     Record an internal support agent's human review decision.
     Valid decisions: 'approved', 'rejected', or 'escalated'.
-    Enforces non-negotiable invariant: approval NEVER automatically sends
-    responses to customers.
+    Enforces non-negotiable invariant: approval NEVER automatically sends responses to customers.
+    Derives reviewer identity exclusively from Clerk session token.
     """
     try:
         parsed_complaint_id = uuid.UUID(complaint_id)
@@ -378,16 +557,32 @@ def record_review_decision(
                     except ValueError:
                         pass
 
-                # If reviewer edited the final response text, optionally validate and record
+                # If reviewer edited the final response text, record the edited draft with agent identity
                 if request.final_response_text:
+                    edited_draft_id = uuid.uuid4()
                     db_edited_draft = ResponseDraft(
-                        id=uuid.uuid4(),
+                        id=edited_draft_id,
                         complaint_id=parsed_complaint_id,
                         draft_text=request.final_response_text,
-                        structured_output={"edited_by": "human_reviewer"},
+                        structured_output={"edited_by": current_agent.display_name},
                         validation_status="valid",
+                        created_by_agent_id=current_agent.id,
                     )
                     db.add(db_edited_draft)
+
+                    # Log audit event for draft edit
+                    db.add(
+                        ComplaintAuditLog(
+                            id=uuid.uuid4(),
+                            complaint_id=parsed_complaint_id,
+                            actor_agent_id=current_agent.id,
+                            event_type="draft_edited",
+                            details={
+                                "draft_id": str(edited_draft_id),
+                                "editor_name": current_agent.display_name,
+                            },
+                        )
+                    )
 
                 db_decision = ReviewDecision(
                     id=decision_id,
@@ -396,6 +591,7 @@ def record_review_decision(
                     decision=request.decision,
                     final_response_text=request.final_response_text,
                     reason=request.reason,
+                    reviewer_profile_id=current_agent.id,
                     reviewed_at=reviewed_at,
                 )
                 db.add(db_decision)
@@ -408,6 +604,22 @@ def record_review_decision(
                     elif request.decision == "escalated":
                         complaint.processing_status = "escalated"
 
+                # Log audit event for review decision
+                action_type = "case_escalated" if request.decision == "escalated" else f"review_{request.decision}"
+                db.add(
+                    ComplaintAuditLog(
+                        id=uuid.uuid4(),
+                        complaint_id=parsed_complaint_id,
+                        actor_agent_id=current_agent.id,
+                        event_type=action_type,
+                        details={
+                            "decision": request.decision,
+                            "reason": request.reason,
+                            "reviewer_name": current_agent.display_name,
+                        },
+                    )
+                )
+
                 db.commit()
         except Exception as exc:
             logger.error("Failed to record review decision in database: %s", exc)
@@ -419,8 +631,54 @@ def record_review_decision(
         decision=request.decision,
         final_response_text=request.final_response_text,
         reason=request.reason,
+        reviewer_id=str(current_agent.id),
+        reviewer_name=current_agent.display_name,
         reviewed_at=reviewed_at,
     )
+
+
+@router.get(
+    "/{complaint_id}/audit",
+    response_model=List[ComplaintAuditLogResponse],
+    summary="Retrieve immutable audit events for a complaint",
+)
+def get_complaint_audit_logs(
+    complaint_id: str,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> List[ComplaintAuditLogResponse]:
+    """
+    Retrieve audit trail for a complaint, showing actor identity, timestamps, and action details.
+    """
+    try:
+        parsed_id = uuid.UUID(complaint_id)
+    except ValueError:
+        raise ResourceNotFoundException("complaint", complaint_id)
+
+    factory = get_session_factory()
+    results: List[ComplaintAuditLogResponse] = []
+
+    if factory is not None:
+        with factory() as db:
+            logs = (
+                db.query(ComplaintAuditLog)
+                .filter(ComplaintAuditLog.complaint_id == parsed_id)
+                .order_by(ComplaintAuditLog.created_at.asc())
+                .all()
+            )
+            for log in logs:
+                results.append(
+                    ComplaintAuditLogResponse(
+                        id=str(log.id),
+                        complaint_id=str(log.complaint_id),
+                        actor_agent_id=str(log.actor_agent_id) if log.actor_agent_id else None,
+                        actor_name=log.actor.display_name if log.actor else "System",
+                        event_type=log.event_type,
+                        details=log.details,
+                        created_at=log.created_at,
+                    )
+                )
+
+    return results
 
 
 @router.get(
@@ -428,7 +686,10 @@ def record_review_decision(
     response_model=ComplaintHistoryResponse,
     summary="Retrieve complaint lifecycle and audit history",
 )
-def get_complaint_history(complaint_id: str) -> ComplaintHistoryResponse:
+def get_complaint_history(
+    complaint_id: str,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> ComplaintHistoryResponse:
     """Retrieve full audit history for a complaint."""
     try:
         parsed_id = uuid.UUID(complaint_id)
@@ -462,6 +723,7 @@ def get_complaint_history(complaint_id: str) -> ComplaintHistoryResponse:
                         .all()
                     )
                     for dec in decisions:
+                        rev_name = dec.reviewer_profile.display_name if dec.reviewer_profile else None
                         review_responses.append(
                             ReviewDecisionResponse(
                                 review_id=str(dec.id),
@@ -470,6 +732,8 @@ def get_complaint_history(complaint_id: str) -> ComplaintHistoryResponse:
                                 decision=dec.decision,
                                 final_response_text=dec.final_response_text,
                                 reason=dec.reason,
+                                reviewer_id=str(dec.reviewer_profile_id) if dec.reviewer_profile_id else None,
+                                reviewer_name=rev_name,
                                 reviewed_at=dec.reviewed_at,
                             )
                         )

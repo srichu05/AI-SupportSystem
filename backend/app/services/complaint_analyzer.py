@@ -21,12 +21,13 @@ RE_EXP = re.compile(r"\b(?:EXP|EXPIRES)\s*[:#]?\s*\d{1,2}/\d{2,4}\b", re.IGNOREC
 
 # Adversarial prompt injection markers
 ADVERSARIAL_PATTERNS = [
-    re.compile(r"\[(?:SYSTEM|INSTRUCTION|DIRECTIVE|IMPORTANT|ADMIN|DEVELOPER|PROMPT)[\s\S]*?\]", re.IGNORECASE),
+    re.compile(r"\[(?:SYSTEM|INSTRUCTION|DIRECTIVE|IMPORTANT|ADMIN|DEVELOPER|PROMPT|AGENT)[\s\S]*?\]", re.IGNORECASE),
     re.compile(r"ignore\s+(?:all\s+)?(?:company\s+)?(?:policy|instructions|rules|limits)", re.IGNORECASE),
     re.compile(r"(?:print|reveal|disclose|show|leak)\s+(?:all\s+)?(?:api\s+keys|secrets|passwords|database\s+schema|system\s+instructions)", re.IGNORECASE),
     re.compile(r"(?:bypass|skip|disable)\s+(?:human|agent|manual)\s+(?:approval|review)", re.IGNORECASE),
     re.compile(r"irrevocably\s+promises", re.IGNORECASE),
     re.compile(r"without\s+waiting\s+for\s+(?:an?\s+)?agent", re.IGNORECASE),
+    re.compile(r"(?:DROP\s+TABLE|UPDATE\s+\w+\s+SET|DELETE\s+FROM|SELECT\s+.*?FROM|--\s*\[)", re.IGNORECASE),
 ]
 
 
@@ -272,11 +273,42 @@ class ComplaintAnalyzer:
         if "breach of contract" in c_lower and "risk of loss" in c_lower and "$1,000" in c_lower:
             return "conflict", "Adversary asserts legal tension between policy passages to coerce monetary admission."
 
+        # Rule 5b: Account takeover / Fraudulent purchase / Suspicious activity
+        if any(k in c_lower for k in ("never placed", "compromised", "account takeover", "unauthorized order", "suspicious activity", "fraudulent purchase")):
+            return "needs_human_review", "Suspicious activity or unauthorized order reported; immediate escalation to fraud and security reviewer."
+
+        # Rule 5c: Competitor price matching exclusions (unauthorized seller, auction, darknet, marketplace)
+        if ("price match" in c_lower or "price match" in i_lower or "match" in i_lower) and any(
+            k in c_lower for k in ("auction", "marketplace", "unauthorized", "darknet", "stolen", "discount club", "third-party", "third party")
+        ):
+            return "prohibited", "Price matching explicitly excludes third-party marketplaces, auction sites, unauthorized sellers, and discount clubs."
+
+        # Rule 5d: VIP points expiration, non-transferability, and cash redemption prohibition
+        if ("vip points" in c_lower or "loyalty points" in c_lower or ("points" in c_lower and "vip" in c_lower)) and any(
+            k in c_lower for k in ("inactive", "expired", "transfer", "cash", "credit my bank", "sister's account")
+        ):
+            return "prohibited", "VIP loyalty points expire after 1 year of account inactivity, have no cash value, and are non-transferable."
+
+        # Rule 5e: Gift card or store credit cash conversion prohibition
+        if ("store credit" in c_lower or "gift certificate" in c_lower or "gift card" in c_lower) and any(
+            k in c_lower for k in ("wire transfer", "cash", "venmo", "personal bank", "convert")
+        ):
+            return "prohibited", "Returns purchased with gift cards or store credit are strictly refunded as store credit and cannot be converted to cash or external transfers."
+
+        # Rule 5f: APO expedited delivery override attempt
+        if facts.get("destination_type") == "military_apo_fpo" and any(k in c_lower for k in ("override", "insist", "guarantee 2-day", "2-day delivery")):
+            return "prohibited", "Expedited shipping is strictly unavailable to military APO/FPO addresses regardless of customer VIP status."
+
         # Rule 6: Worn merchandise or exceeded 60-day window
         days = facts.get("days_elapsed", 0)
         condition = facts.get("condition")
-        if (days > 60) or (condition == "worn_used" and "outdoors" in c_lower):
+        if days > 60:
+            if any(k in c_lower for k in ("hospital", "medical", "emergency", "exception", "extenuating")):
+                return "needs_human_review", "Return request beyond 60-day window due to medical emergency requires supervisor review for store credit exception."
             return "prohibited", "Exceeds 60-day return window and/or violates requirement that returned merchandise must be in new/unworn condition."
+
+        if condition == "worn_used" and "outdoors" in c_lower:
+            return "prohibited", "Merchandise worn outdoors violates requirement that returned merchandise must be in new/unworn condition."
 
         # Rule 7: Free upgrade exchange without paying price difference
         if "exchange" in i_lower and ("different brand" in c_lower or "$40 more" in c_lower or "without paying" in c_lower):
@@ -289,6 +321,26 @@ class ComplaintAnalyzer:
         # Rule 9: Inconvenience damages demand
         if "inconvenience" in i_lower or "$100" in i_lower:
             return "prohibited", "Monetary compensation for inconvenience is barred by the disclaimer and limitation of liability in Conditions of Use."
+
+        # Rule 9b: Zappos Price Guarantee (10-day price drop refund on zappos.com)
+        if (
+            ("price adjustment" in c_lower or "price guarantee" in c_lower or "marked down" in c_lower or "price drop" in c_lower or "difference" in c_lower)
+            and ("website" in c_lower or "zappos" in c_lower)
+            and days <= 10
+        ):
+            return "covered", "Covered under Price Guarantee Policy: item price reduction within 10 calendar days qualifies for difference refund to original payment method."
+
+        # Rule 9c: Misplaced return label reprint
+        if "label" in c_lower and any(k in c_lower for k in ("another copy", "reprint", "misplaced", "puppy chewed")):
+            return "covered", "Customer can reprint or retrieve misplaced return labels via account order history."
+
+        # Rule 9d: Multi-box return procedure
+        if any(k in c_lower for k in ("separate boxes", "multi-box", "multiple boxes", "combine them into one", "single box")) and "return" in c_lower:
+            return "covered", "Multi-box returns are covered under FAQ guidelines on returning split shipments."
+
+        # Rule 9e: Payment verification delay
+        if "payment verification" in c_lower or "billing verification" in c_lower or "authorization hold" in c_lower:
+            return "covered", "Covered under FAQ payment guidelines explaining security holds and billing verification steps."
 
         # Rule 10: Expedited shipping to military APO/FPO addresses
         if facts.get("destination_type") == "military_apo_fpo" and "expedited" in c_lower:

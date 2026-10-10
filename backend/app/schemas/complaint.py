@@ -109,3 +109,7 @@ class ComplaintResponse(BaseModel):
         default=None,
         description="Optional tone variants if requested and generated"
     )
+    created_by_agent_id: Optional[str] = Field(default=None, description="Agent who submitted complaint")
+    created_by_agent_name: Optional[str] = Field(default=None, description="Display name of creating agent")
+    assigned_to_agent_id: Optional[str] = Field(default=None, description="Agent currently assigned")
+    assigned_to_agent_name: Optional[str] = Field(default=None, description="Display name of assigned agent")

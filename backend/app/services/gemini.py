@@ -251,7 +251,7 @@ class GeminiService:
         model_id: Optional[str] = None,
         target_dim: Optional[int] = None,
         batch_size: int = 10,
-        max_retries: int = 3,
+        max_retries: int = 5,
     ) -> List[List[float]]:
         """
         Generate vector embeddings for a list of texts using hosted Gemini embedding model.
@@ -333,9 +333,20 @@ class GeminiService:
                         err_msg,
                     )
                     if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg or "UNAVAILABLE" in err_msg:
-                        # Exponential backoff
                         import time
-                        time.sleep(2 ** attempt)
+                        import re
+                        wait_match = re.search(r"retry in (\d+(?:\.\d+)?)s", err_msg)
+                        if wait_match:
+                            sleep_secs = float(wait_match.group(1)) + 2.0
+                        else:
+                            sleep_secs = max(10.0, 2.0 ** attempt)
+                        logger.info(
+                            "Rate limit or temporary unavailable encountered; backing off for %.1fs (attempt %d/%d)",
+                            sleep_secs,
+                            attempt,
+                            max_retries,
+                        )
+                        time.sleep(sleep_secs)
                     else:
                         break
 

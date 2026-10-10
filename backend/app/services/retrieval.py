@@ -34,11 +34,15 @@ class RetrievedChunk:
     keyword_rank: Optional[int]
     keyword_score: Optional[float]
     rrf_score: float
+    source_id: Optional[str] = None
+    canonical_url: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "chunk_id": self.chunk_id,
             "document_id": self.document_id,
+            "source_id": self.source_id,
+            "canonical_url": self.canonical_url,
             "source_filename": self.source_filename,
             "section_path": self.section_path,
             "page_number": self.page_number,
@@ -146,6 +150,8 @@ class HybridRetrievalService:
                     c.id AS chunk_id,
                     c.document_id AS document_id,
                     d.source_filename AS source_filename,
+                    d.source_id AS source_id,
+                    d.canonical_url AS canonical_url,
                     c.section_path AS section_path,
                     c.page_number AS page_number,
                     c.content AS content,
@@ -164,6 +170,8 @@ class HybridRetrievalService:
                         "chunk_id": str(r["chunk_id"]),
                         "document_id": str(r["document_id"]),
                         "source_filename": r["source_filename"],
+                        "source_id": r.get("source_id"),
+                        "canonical_url": r.get("canonical_url"),
                         "section_path": r["section_path"],
                         "page_number": r["page_number"],
                         "content": r["content"],
@@ -198,6 +206,8 @@ class HybridRetrievalService:
                 "chunk_id": str(chunk.id),
                 "document_id": str(doc.id),
                 "source_filename": doc.source_filename,
+                "source_id": getattr(doc, "source_id", None),
+                "canonical_url": getattr(doc, "canonical_url", None),
                 "section_path": chunk.section_path,
                 "page_number": chunk.page_number,
                 "content": chunk.content,
@@ -225,6 +235,8 @@ class HybridRetrievalService:
                     c.id AS chunk_id,
                     c.document_id AS document_id,
                     d.source_filename AS source_filename,
+                    d.source_id AS source_id,
+                    d.canonical_url AS canonical_url,
                     c.section_path AS section_path,
                     c.page_number AS page_number,
                     c.content AS content,
@@ -244,6 +256,8 @@ class HybridRetrievalService:
                             "chunk_id": str(r["chunk_id"]),
                             "document_id": str(r["document_id"]),
                             "source_filename": r["source_filename"],
+                            "source_id": r.get("source_id"),
+                            "canonical_url": r.get("canonical_url"),
                             "section_path": r["section_path"],
                             "page_number": r["page_number"],
                             "content": r["content"],
@@ -266,6 +280,8 @@ class HybridRetrievalService:
                         c.id AS chunk_id,
                         c.document_id AS document_id,
                         d.source_filename AS source_filename,
+                        d.source_id AS source_id,
+                        d.canonical_url AS canonical_url,
                         c.section_path AS section_path,
                         c.page_number AS page_number,
                         c.content AS content,
@@ -285,6 +301,8 @@ class HybridRetrievalService:
                                 "chunk_id": str(r["chunk_id"]),
                                 "document_id": str(r["document_id"]),
                                 "source_filename": r["source_filename"],
+                                "source_id": r.get("source_id"),
+                                "canonical_url": r.get("canonical_url"),
                                 "section_path": r["section_path"],
                                 "page_number": r["page_number"],
                                 "content": r["content"],
@@ -322,6 +340,8 @@ class HybridRetrievalService:
                 "chunk_id": str(chunk.id),
                 "document_id": str(doc.id),
                 "source_filename": doc.source_filename,
+                "source_id": getattr(doc, "source_id", None),
+                "canonical_url": getattr(doc, "canonical_url", None),
                 "section_path": chunk.section_path,
                 "page_number": chunk.page_number,
                 "content": chunk.content,
@@ -391,8 +411,12 @@ class HybridRetrievalService:
                     keyword_rank=kw_ranks.get(cid),
                     keyword_score=kw_scores.get(cid),
                     rrf_score=fused_scores[cid],
+                    source_id=meta.get("source_id"),
+                    canonical_url=meta.get("canonical_url"),
                 )
             )
+
+        return results
 
         return results
 

@@ -34,6 +34,7 @@ class ExtractedDocument:
     raw_text: str
     sections: List[ExtractedSection]
     total_characters: int
+    metadata: Optional[dict] = None
 
 
 class DocumentExtractor:
@@ -213,7 +214,7 @@ class DocumentExtractor:
         )
 
     def _extract_txt(self, filename: str, content: bytes) -> ExtractedDocument:
-        """Extract text and section boundaries from plain text files."""
+        """Extract text, metadata headers, and section boundaries from plain text files."""
         # Try UTF-8 first, fallback to Latin-1
         try:
             text = content.decode("utf-8")
@@ -229,11 +230,13 @@ class DocumentExtractor:
 
         # Detect sections by markdown headers (e.g., # Header, ## Header) or ALL CAPS headings
         lines = text.splitlines()
+        meta: dict = {}
         sections: List[ExtractedSection] = []
         current_heading: Optional[str] = None
         current_lines: List[str] = []
+        in_header_meta = True
 
-        heading_pattern = re.compile(r"^(?:#{1,4}\s+|[A-Z0-9\s,:\-]{4,60}$)")
+        num_heading_pattern = re.compile(r"^\d+[\.\)]+\s+[A-Za-z]")
 
         def flush_txt_section():
             nonlocal current_lines
@@ -249,8 +252,29 @@ class DocumentExtractor:
                     )
                 current_lines = []
 
+        KNOWN_META_KEYS = {
+            "source id", "source_id", "title", "url", "canonical url",
+            "publisher", "retrieved date", "extraction status",
+            "document type", "intended use"
+        }
+
         for line in lines:
             stripped = line.strip()
+
+            # Parse leading metadata headers if present (# Source ID: ..., # URL: ..., # ---)
+            if in_header_meta:
+                if stripped.startswith("# ---") or stripped.startswith("## ---"):
+                    continue
+                elif stripped.startswith("#") and ":" in stripped:
+                    k, v = stripped.lstrip("#").split(":", 1)
+                    k_clean = k.strip().lower()
+                    if k_clean in KNOWN_META_KEYS:
+                        meta[k_clean.replace(" ", "_")] = v.strip()
+                        continue
+                elif not stripped:
+                    continue
+                in_header_meta = False
+
             if not stripped:
                 if current_lines:
                     current_lines.append("")
@@ -266,6 +290,12 @@ class DocumentExtractor:
             elif len(stripped) < 60 and stripped.endswith(":") and not stripped.startswith("http"):
                 flush_txt_section()
                 current_heading = stripped.rstrip(":")
+            elif len(stripped) < 70 and num_heading_pattern.match(stripped):
+                flush_txt_section()
+                current_heading = stripped
+            elif stripped in ["Price Matching Policy", "Price Guarantee Policy"]:
+                flush_txt_section()
+                current_heading = stripped
             else:
                 current_lines.append(stripped)
 
@@ -286,6 +316,7 @@ class DocumentExtractor:
             raw_text=clean_text,
             sections=sections,
             total_characters=len(clean_text),
+            metadata=meta,
         )
 
 

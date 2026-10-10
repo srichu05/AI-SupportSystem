@@ -66,6 +66,9 @@ def validate_source_audit(errors: list) -> int:
     return len(rows)
 
 
+ALLOWED_PROVENANCE_TYPES = {"synthetic", "public_benchmark"}
+
+
 def validate_policy_documents(errors: list):
     pol_dir = DATA_DIR / "policy_documents"
     raw_html_dir = pol_dir / "raw_html"
@@ -73,8 +76,18 @@ def validate_policy_documents(errors: list):
     expected_files = [
         (raw_html_dir / "zappos_shipping_and_returns.html", 5000),
         (raw_html_dir / "zappos_conditions_of_use.html", 5000),
+        (raw_html_dir / "zappos_general_questions.html", 5000),
+        (raw_html_dir / "zappos_customer_service_hub.html", 5000),
+        (raw_html_dir / "zappos_vip_terms.html", 5000),
+        (raw_html_dir / "zappos_privacy_policy.html", 5000),
+        (raw_html_dir / "zappos_price_matching.html", 5000),
         (pol_dir / "zappos_shipping_and_returns.txt", 1000),
         (pol_dir / "zappos_conditions_of_use.txt", 1000),
+        (pol_dir / "zappos_general_questions.txt", 1000),
+        (pol_dir / "zappos_customer_service_hub.txt", 1000),
+        (pol_dir / "zappos_vip_terms.txt", 1000),
+        (pol_dir / "zappos_privacy_policy.txt", 1000),
+        (pol_dir / "zappos_price_matching.txt", 1000),
     ]
 
     for p, min_size in expected_files:
@@ -85,6 +98,25 @@ def validate_policy_documents(errors: list):
         else:
             print(f"  [PASS] {p.name} verified ({p.stat().st_size} bytes)")
 
+    # Verify substantive price matching policy text
+    pm_path = pol_dir / "zappos_price_matching.txt"
+    if pm_path.exists():
+        pm_text = pm_path.read_text(encoding="utf-8")
+        if "Price Guarantee" not in pm_text or "10 calendar days" not in pm_text:
+            errors.append("zappos_price_matching.txt missing Price Guarantee policy text")
+        if "auction" not in pm_text.lower() or "third-party" not in pm_text.lower():
+            errors.append("zappos_price_matching.txt missing auction/third-party exclusion text")
+        print("  [PASS] zappos_price_matching.txt substantive policy content verified")
+
+    # Verify no duplicate button artifact in customer service hub
+    csh_path = pol_dir / "zappos_customer_service_hub.txt"
+    if csh_path.exists():
+        csh_text = csh_path.read_text(encoding="utf-8")
+        if "Sign In to Start a Return Sign In to Start a Return" in csh_text:
+            errors.append("zappos_customer_service_hub.txt contains duplicated button text artifact")
+        else:
+            print("  [PASS] zappos_customer_service_hub.txt clean of duplicate responsive button labels")
+
 
 def validate_development_complaints(errors: list) -> int:
     path = DATA_DIR / "raw" / "development_complaints.csv"
@@ -94,7 +126,8 @@ def validate_development_complaints(errors: list) -> int:
 
     expected_headers = [
         "case_id", "complaint_text", "issue_categories",
-        "expected_status", "expected_action", "expected_escalation", "notes"
+        "expected_status", "expected_action", "expected_escalation", "notes",
+        "provenance_type"
     ]
 
     with open(path, "r", encoding="utf-8") as f:
@@ -109,6 +142,7 @@ def validate_development_complaints(errors: list) -> int:
         errors.append(f"development_complaints.csv has fewer than 10 cases (found {len(rows)})")
 
     case_ids = set()
+    prov_counts = {"synthetic": 0, "public_benchmark": 0}
     for i, r in enumerate(rows, 1):
         cid = r.get("case_id", "")
         if not cid:
@@ -128,7 +162,23 @@ def validate_development_complaints(errors: list) -> int:
         if not r.get("expected_action"):
             errors.append(f"development_complaints.csv {cid} missing expected_action")
 
-    print(f"  [PASS] development_complaints.csv validated ({len(rows)} cases, unique IDs)")
+        prov = r.get("provenance_type", "")
+        if prov not in ALLOWED_PROVENANCE_TYPES:
+            errors.append(f"development_complaints.csv {cid} invalid provenance_type: '{prov}'")
+        else:
+            prov_counts[prov] += 1
+
+        if cid.startswith("CMP-BITEXT-"):
+            if prov != "public_benchmark":
+                errors.append(f"development_complaints.csv {cid} expected provenance_type 'public_benchmark', got '{prov}'")
+        elif cid.startswith("CMP-"):
+            if prov != "synthetic":
+                errors.append(f"development_complaints.csv {cid} expected provenance_type 'synthetic', got '{prov}'")
+
+    print(
+        f"  [PASS] development_complaints.csv validated ({len(rows)} cases, unique IDs, "
+        f"provenance: {prov_counts['synthetic']} synthetic, {prov_counts['public_benchmark']} public_benchmark)"
+    )
     return len(rows)
 
 

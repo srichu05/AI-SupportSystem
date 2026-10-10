@@ -18,8 +18,12 @@ class Settings(BaseSettings):
 
     # CORS
     CORS_ORIGINS: Union[List[str], str] = Field(
-        default=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+        default=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://127.0.0.1:3000"],
         description="Allowed CORS origins"
+    )
+    CORS_ORIGIN_REGEX: Optional[str] = Field(
+        default=r"^https://.*\.vercel\.app$",
+        description="Regex pattern for dynamic CORS origins such as Vercel preview and production deployments"
     )
 
     # Database
@@ -39,6 +43,15 @@ class Settings(BaseSettings):
     GEMINI_GENERATION_MODEL: str = Field(default="gemini-3.8-flash", description="Model ID for generation")
     GEMINI_EMBEDDING_MODEL: str = Field(default="gemini-embedding-2", description="Model ID for embeddings")
     EMBEDDING_DIMENSIONS: int = Field(default=768, description="Target dimension for embeddings")
+
+    # Clerk Authentication
+    CLERK_SECRET_KEY: Optional[str] = Field(default=None, description="Clerk secret key (sk_test_... or sk_live_...)")
+    CLERK_PUBLISHABLE_KEY: Optional[str] = Field(default=None, description="Clerk publishable key (pk_test_... or pk_live_...)")
+    CLERK_JWT_KEY: Optional[str] = Field(default=None, description="Clerk PEM public key for local JWT verification")
+    CLERK_JWKS_URL: Optional[str] = Field(default=None, description="Clerk JWKS URL for key retrieval")
+    CLERK_ISSUER: Optional[str] = Field(default=None, description="Expected Clerk token issuer URL")
+    CLERK_AUTHORIZED_PARTY: Optional[str] = Field(default=None, description="Expected authorized party (azp) origin")
+    AUTH_ENABLED: bool = Field(default=True, description="Enforce Clerk authentication on protected routes")
 
     # Ingestion & Chunking
     CHUNK_SIZE: int = Field(default=1500, description="Target chunk size in characters (~375 tokens)")
@@ -101,6 +114,15 @@ class Settings(BaseSettings):
     @property
     def is_supabase_configured(self) -> bool:
         return bool(self.SUPABASE_URL and self.SUPABASE_URL.strip())
+
+    @property
+    def is_clerk_configured(self) -> bool:
+        return bool(
+            (self.CLERK_SECRET_KEY and self.CLERK_SECRET_KEY.strip())
+            or (self.CLERK_JWT_KEY and self.CLERK_JWT_KEY.strip())
+            or (self.CLERK_JWKS_URL and self.CLERK_JWKS_URL.strip())
+            or (self.CLERK_PUBLISHABLE_KEY and self.CLERK_PUBLISHABLE_KEY.strip())
+        )
 
     def masked_database_url(self) -> str:
         """Return database URL with password masked."""

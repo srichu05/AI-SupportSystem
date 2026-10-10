@@ -73,3 +73,6 @@ logs/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Frontend repository workspace
+frontend/
