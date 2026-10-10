@@ -69,6 +69,72 @@ class GeminiService:
                 "message": str(exc).splitlines()[0],
             }
 
+    def generate_text(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None,
+        model_id: Optional[str] = None,
+        temperature: float = 0.2,
+        max_retries: int = 2,
+    ) -> str:
+        """
+        Generate grounded text completion using hosted Gemini model.
+        Applies exponential backoff on retryable provider errors (429, 503).
+        """
+        if not self.is_configured:
+            raise ProviderUnavailableException(
+                provider="Gemini Generation",
+                message="GEMINI_API_KEY is not configured.",
+            )
+
+        target_model = model_id or settings.GEMINI_GENERATION_MODEL
+        client = self.get_client()
+
+        kwargs = {}
+        try:
+            from google.genai import types
+            config_kwargs = {"temperature": temperature}
+            if system_instruction:
+                config_kwargs["system_instruction"] = system_instruction
+            kwargs["config"] = types.GenerateContentConfig(**config_kwargs)
+        except Exception as exc:
+            logger.debug("GenerateContentConfig setup fallback: %s", exc)
+
+        last_exc = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                response = client.models.generate_content(
+                    model=target_model,
+                    contents=prompt,
+                    **kwargs,
+                )
+                text = getattr(response, "text", "") or ""
+                return text.strip()
+            except Exception as exc:
+                last_exc = exc
+                err_msg = str(exc)
+                logger.warning(
+                    "Gemini generate_text attempt %d/%d failed: %s",
+                    attempt,
+                    max_retries,
+                    err_msg,
+                )
+                if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg or "UNAVAILABLE" in err_msg:
+                    import time
+                    time.sleep(2 ** attempt)
+                else:
+                    break
+
+        if "429" in str(last_exc) or "RESOURCE_EXHAUSTED" in str(last_exc):
+            raise ProviderRateLimitException(
+                provider="Gemini Generation",
+                message=f"Gemini generation rate limit exceeded: {last_exc}",
+            )
+        raise ProviderUnavailableException(
+            provider="Gemini Generation",
+            message=f"Gemini generation failed: {last_exc}",
+        )
+
     def verify_embedding(
         self,
         model_id: Optional[str] = None,

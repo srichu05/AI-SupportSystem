@@ -12,6 +12,9 @@ from backend.app.services.complaint_analyzer import (
     ComplaintAnalysisResult,
 )
 
+from backend.app.services.response_validator import response_validator, ResponseValidator, ValidationResult
+from backend.app.services.response_generator import response_generator, ResponseGenerator
+
 __all__ = [
     "gemini_service",
     "GeminiService",
@@ -33,4 +36,9 @@ __all__ = [
     "ComplaintAnalyzer",
     "DecomposedIssue",
     "ComplaintAnalysisResult",
+    "response_validator",
+    "ResponseValidator",
+    "ValidationResult",
+    "response_generator",
+    "ResponseGenerator",
 ]
