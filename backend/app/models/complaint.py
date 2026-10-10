@@ -20,9 +20,15 @@ class Complaint(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
 
+    created_by_agent_id = Column(GUID(), ForeignKey("agent_profiles.id", ondelete="SET NULL"), nullable=True, index=True)
+    assigned_to_agent_id = Column(GUID(), ForeignKey("agent_profiles.id", ondelete="SET NULL"), nullable=True, index=True)
+
     issues = relationship("ComplaintIssue", back_populates="complaint", cascade="all, delete-orphan")
     drafts = relationship("ResponseDraft", back_populates="complaint", cascade="all, delete-orphan")
     decisions = relationship("ReviewDecision", back_populates="complaint", cascade="all, delete-orphan")
+    created_by = relationship("AgentProfile", back_populates="created_complaints", foreign_keys=[created_by_agent_id])
+    assigned_to = relationship("AgentProfile", back_populates="assigned_complaints", foreign_keys=[assigned_to_agent_id])
+    audit_logs = relationship("ComplaintAuditLog", back_populates="complaint", cascade="all, delete-orphan")
 
 
 class ComplaintIssue(Base):

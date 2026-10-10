@@ -15,9 +15,11 @@ class ResponseDraft(Base):
     structured_output = Column(JSON, nullable=True)  # { "issues": [...], "claims": [...], "citations": [...] }
     validation_status = Column(String(50), nullable=False, default="valid")  # valid, invalid, warnings
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    created_by_agent_id = Column(GUID(), ForeignKey("agent_profiles.id", ondelete="SET NULL"), nullable=True, index=True)
 
     complaint = relationship("Complaint", back_populates="drafts")
     review_decisions = relationship("ReviewDecision", back_populates="draft", cascade="all, delete-orphan")
+    created_by = relationship("AgentProfile", back_populates="created_drafts", foreign_keys=[created_by_agent_id])
 
 
 class ReviewDecision(Base):
@@ -30,7 +32,9 @@ class ReviewDecision(Base):
     final_response_text = Column(Text, nullable=True)
     reason = Column(Text, nullable=True)
     reviewer_id = Column(String(100), nullable=True)
+    reviewer_profile_id = Column(GUID(), ForeignKey("agent_profiles.id", ondelete="SET NULL"), nullable=True, index=True)
     reviewed_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     complaint = relationship("Complaint", back_populates="decisions")
     draft = relationship("ResponseDraft", back_populates="review_decisions")
+    reviewer_profile = relationship("AgentProfile", back_populates="reviews", foreign_keys=[reviewer_profile_id])
