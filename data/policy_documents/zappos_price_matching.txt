@@ -1,0 +1,35 @@
+# Source ID: SRC-ZAPPOS-008
+# Title: Price Matching & Price Guarantee | Zappos.com
+# URL: https://www.zappos.com/c/price-match
+# Retrieved Date: 2026-10-10
+# Extraction Status: verified
+# Publisher: Zappos.com LLC
+# Document Type: customer_service_policy
+# Intended Use: Grounding competitor price matching rules, qualifying retailer criteria, third-party marketplace exclusions, and 10-day price-drop guarantee refunds.
+# ------------------------------------------------------------
+
+## Zappos Price Matching
+
+### Price Matching Policy
+
+If you find a lower price on an item available in the same brand, color and size on another qualifying retailer’s website before placing your Zappos.com order, Zappos.com will match the retail price plus standard shipping fees. Existing orders are not eligible for price matching.
+
+For example, if an item is available on a qualifying retailer’s website at $30 retail price plus $15 standard shipping fee, we will price match the item at $45 total and provide free standard shipping.
+
+When you are ready to place your order, simply give us a call at (877) 927-2332 or live chat the Zappos Customer Loyalty Team, and we will assist you with placing your order at the adjusted price.
+
+If you receive a price match on an item and later need to exchange the item for different size, we will honor the price you paid on your initial item.  Please note that this will not apply to an exchange for a different color.
+
+We are unable to match prices from auction websites, membership or club websites, outlet websites, non-U.S. based websites, discount websites, and third-party markets or resellers on Amazon.com. We also will not price match other qualifying retailer’s site-wide promotional discounts, coupons, bundle offers, rebates or mail-in offers.
+
+A price match cannot be combined with certain other offers or discounts, is not redeemable for cash, and cannot be applied to gift cards or previous purchases. Applicable sales tax will be added to all orders.  Other restrictions may apply.
+
+### Price Guarantee Policy
+
+If you find the price for an item you have purchased within the last 10 calendar days on Zappos.com has been reduced, you may call in at (877) 927-2332 or live chat the Zappos Customer Loyalty Team to request a refund for the difference.
+
+For example, if you purchase an item on the 1 st day of the month from Zappos for $30 and on the 8 th day of the month the price is reduced by Zappos to $25, you may request a refund for the difference of $5, so long as the item is still available in the same brand, color and size.  If eligible, you will receive a refund for the difference, plus any applicable sales tax. We cannot apply discount codes or site-wide promotions offered after you make a purchase.
+
+If you receive a price guarantee refund on an item and later need to exchange the item for a different size, we will honor the reduced price.  Please note that this will not apply to an exchange for a different color.
+
+The price guarantee refund must be issued to the same payment method that was used to place the initial order.  A price guarantee cannot be combined with certain other offers or discounts, and cannot be applied to gift cards or shipping costs. Other restrictions may apply.

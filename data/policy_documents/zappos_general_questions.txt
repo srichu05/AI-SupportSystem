@@ -1,0 +1,619 @@
+# Source ID: SRC-ZAPPOS-003
+# Title: General Questions | Zappos.com
+# URL: https://www.zappos.com/c/general-questions
+# Retrieved Date: 2026-10-10
+# Extraction Status: success
+# Publisher: Zappos.com LLC
+# Document Type: customer_faq_policy
+# Intended Use: Grounding return label retrieval, multi-box returns, price match guarantee (10-day price drop refund), payment authorization delays, and account security/phishing rules.
+# ------------------------------------------------------------
+
+## Frequently Asked Questions
+
+### Returns
+
+- I want to return my purchase! What do I do?
+- I would like to return a gift that was sent to me. How do I do that?
+- I printed out my label and misplaced it. How can I retrieve it again?
+- How long does it take for me to get a refund?
+- Do your pre-paid labels cover international returns?
+- I am returning an item purchased with a Gift Certificate or Gift Card, how does that work?
+- I only see the option to return my order through UPS on the website. Am I able to return through USPS instead?
+- How do I return orders shipped in multiple boxes?
+- I returned the wrong item by mistake. What do I do?
+
+### Shoes/Brands
+
+- How do I know my shoe size?
+- I want to know if you carry a specific brand/color/size/width?
+
+### Across the Board
+
+- Are there Zappos.com gift certificates and/or gift cards?
+- Do you do back orders?
+- Do you have a catalog?
+- Do you have a price matching policy?
+- Do you match prices if an item goes on sale after my purchase?
+- Do you offer Live Chat support?
+- How can I write a review on a product?
+- How do I unsubscribe from any of your mailing lists?
+- How do I use my Gift Certificate/Coupon Code?
+- I tried to check out and the item in my shopping cart disappeared, what happened?
+- Is the item I want going to go on sale soon?
+- My email address has changed. How do I update this information to my current account?
+- The item I want is out of stock.  What do I do now?
+- Do you accept orders through VOIP?
+- How do I care for XYZ fabric?
+- What is a Zappos Verified Purchase review?
+- Do you ship internationally?
+- Do you have Guest checkout?
+
+### Suspicious Activity
+
+- I received an email from Zappos.com regarding an order I didn’t place. What should I do?
+- How do I identify whether an Email is or is not from Zappos?
+- What should I do if I believe I’ve received a phishing email or if I responded to what may be a phishing email?
+- How to Obtain Zappos Transaction Records After Identity Theft
+
+### Payment Information
+
+- Do you accept international credit cards?
+- Do you allow Cashier's Checks or Money Orders?
+- Do you charge sales tax on any item?
+- What forms of payment do you accept?
+- What can cause my order to be delayed?
+- Can I pay with multiple Visa, Mastercard, American Express, or Discover Pre-Paid Gift Cards?
+
+### Amazon Pay
+
+- What is Amazon Pay?
+- How do I open an Amazon Pay account?
+- How do I find my Amazon Pay transactions?
+- What does it cost to use Amazon Pay?
+
+### Paypal
+
+- What is PayPal?
+- How do I place my order using PayPal?
+- What happens after my order has been placed using PayPal?
+- I received an email from PayPal indicating that my order has been submitted but I didn’t receive an order confirmation from Zappos, what does this mean?
+- How can I re-place an order that didn’t process correctly (e.g., in the scenario above)?
+- Is PayPal available on the Zappos App?
+- Can I use PayPal with Zappos gift cards and promotion codes?
+- My order placed with PayPal was declined, now what do I do?
+- Can I add items to my order after processing my order through PayPal flow?
+- Can I cancel my PayPal order?
+- Can I use a combination of PayPal information and Zappos information during checkout?
+
+### Technology
+
+- What are cookies? Do I need to enable cookies on my browser?
+- When placing an order I get an error message stating that there has been an authorization failure. What went wrong?
+
+### About
+
+- Are there any benefits to having an account with you?
+- How can I get assistance if I need it?
+- Is there a way I can learn more about the Zappos Family?
+- What are your shipping and return policies?
+- What kind of selection do you have?
+
+### Apple Pay
+
+- What is Apple Pay?
+- How do I place my order using Apple Pay?
+- What happens after my order has been placed using Apple Pay?
+- Is Apple Pay available on the Zappos App?
+- Can I use Apple Pay with Zappos gift cards and promotion codes?
+- My order placed with Apple Pay was declined, now what do I do?
+- Can I add items to my order after processing my order through Apple Pay?
+- Can I cancel my Apple Pay order?
+- Can I use a combination of Apple Pay information and Zappos information during checkout?
+- How long does it take for me to get a refund?
+
+### Returns
+
+### I want to return my purchase! What do I do?
+
+Item(s) may be returned for a full refund to your original form of payment within 60 days of purchase.
+*Items indicated as Final Sale merchandise are sold as-is and do not qualify for returns.
+ *Items part of a site-wide sale or promotion are eligible for return unless otherwise stated. 
+*Returns must be unworn, in the state you received them, and in the original packaging. 
+*Some items ship with an attached security tag, and merchandise returned without the original security tag attached or a damaged tag may not qualify for a refund. Returns that do not comply with our return policy may not be eligible for a refund or could result in a restocking fee up to 50% of the item price.
+
+For more information on returns, please see the Zappos Shipping and Returns Policies .
+
+If you have a Zappos account, sign in to manage your orders and returns. If you checked out as a guest, click the Order Number in any of your order-related emails (confirmation, shipping, or delivery) to start your return.
+
+### I would like to return a gift that was sent to me. How do I do that?
+
+For assistance with returning a gift you received, please call Zappos Customer Service at 1-800-927-7671 for assistance returning the item. Please note that in order to assist you, our team will need the phone number, first and last name, tracking number or shipping address of the person who gifted you the item. Typically, a return will be refunded to the original purchaser's method of payment. However, we would be happy to assist you with a gift return, and issue you a gift card for the return.
+
+### I printed out my label and misplaced it. How can I retrieve it again?
+
+You can find a link to your return label in the return confirmation email you received. If you have a Zappos account, you can also navigate to your Account menu, then to Orders and Returns. Find the order that contains the item you are returning and look for the “Print Return Label” button. If you checked out as a guest, you can click the Order Number in any of your order-related emails (confirmation, shipping, or delivery), and then find the “Print Return Label” button on the Order Information page.
+
+### How long does it take for me to get a refund?
+
+It can take up to 30 days for your return to be inspected and processed for a refund once it is received at our fulfillment center. Returns that do not comply with our return policy may not be eligible for a refund or could result in a restocking fee up to 50% of the item price. In certain circumstances refund time frames may be longer. Once your qualifying return is approved, Zappos will issue your refund. Depending on your method of payment, please allow the additional timeframe for your financial institution to make funds available in your account: Debit or credit cards: up to 10 business days; international cards: up to 30 business days; PayPal transactions: up to 30 business days; AfterPay payments: up to 20 business days; and Zappos gift cards: up to 24 hours.
+
+### Do your pre-paid labels cover international returns?
+
+No, our return labels do not cover the price for international returns. To use our return labels, you must send your return from the United States.
+
+### I am returning an item purchased with a Gift Certificate or Gift Card, how does that work?
+
+An order made with a Gift Card as payment will be refunded back to an e-Gift Card for your convenience. New Gift Card codes will be emailed to your email address on file.
+
+### I only see the option to return my order through UPS on the website. Am I able to return through USPS instead?
+
+For self-service returns on Zappos.com, return by UPS is the only option for most customers. If you would rather receive a USPS return label, simply contact us and we'll be happy to send you one.
+
+### How do I return orders shipped in multiple boxes?
+
+If you are returning an order that arrived in multiple boxes, please process a unique return label for each box you are returning. To ensure you receive the correct refund for each box, please verify the items selected for each return label corresponds to the items placed in each box.
+
+### I returned the wrong item by mistake. What do I do?
+
+Zappos is not liable or responsible for any item accidently sent through the return process and assumes no obligation or responsibility to locate or return the item. No compensation, reimbursement, or credit of any kind shall be provided for items returned to Zappos in error.
+
+### Shoes/Brands
+
+### How do I know my shoe size?
+
+If you are unsure of your shoe size, you can measure your shoe size . Because the foot is three-dimensional, any two-dimensional measuring tool, such as a ruler or Brannock device® can only approximate your true shoe size. Please also keep in mind that manufacturers use different lasts to construct their shoes, and sizing may vary accordingly.
+
+### I want to know if you carry a specific brand/color/size/width?
+
+Try clicking Brands button located at the top of each page - you will be taken to a page where you can view all brands that we are currently offering. Please check back often since we add new brands on a daily basis! Or if you know what you're looking for - try the search bar as well.
+
+### Across the Board
+
+### Are there Zappos.com gift certificates and/or gift cards?
+
+Yes! If you're looking for the perfect gift or just doing some last minute shopping, Gift Cards are the perfect solution for you! Give one today!
+
+### Do you do back orders?
+
+No. We do not do back orders. If an item is out of stock Zappos Customer Service will notify you as soon as possible and ask if you would like a replacement item. Out of stock orders will be cancelled unless a replacement item is requested.
+
+### Do you have a catalog?
+
+No. Currently, we have a 'virtual' catalog. In order to ensure that our customers have access to the most current styles, prices, sizes, and overall selection, we do not publish a catalog that you may purchase directly from us. Plus, with all the styles that we carry, a catalog would be as big as a phone book! If there is a particular shoe or style of shoe that you are interested in, please feel free to contact us and we will be happy to help you locate it.
+
+### Do you have a price matching policy?
+
+Please visit our Zappos Price Matching page to learn about our price matching policy.
+
+### Do you match prices if an item goes on sale after my purchase?
+
+Please visit our Zappos Price Matching page to learn about our price matching policy.
+
+### Do you offer Live Chat support?
+
+Yes we do! To get in contact with one of our live chat specialists, click on the chat link on our Contact Us page to open a chat window!
+
+### How can I write a review on a product?
+
+*You can write a product review with just 5 easy steps: *
+
+- On any product page, scroll down and on the left-hand part of the screen, underneath the ‘Customer Feedback section’, you will see a button titled ‘Write a review of this product’.
+On any product page, scroll down and on the left-hand part of the screen, underneath the ‘Customer Feedback section’, you will see a button titled ‘Write a review of this product’.
+
+- Once you click on that button you will see an image of the product, a text box, a rating section, and three sections on how the product fits. Please fill in as much information as you’d like. 
+You can also insert your name, where you live, your email address and other brands that you recommend.
+*Please note: this section is designed around how a shoe fits. We are working on updating this section to be dynamic based on the product type. If the question does not pertain to your product type, please feel free to just type in your review in the text box and select the star ratings.
+Once you click on that button you will see an image of the product, a text box, a rating section, and three sections on how the product fits. Please fill in as much information as you’d like. 
+You can also insert your name, where you live, your email address and other brands that you recommend.
+*Please note: this section is designed around how a shoe fits. We are working on updating this section to be dynamic based on the product type. If the question does not pertain to your product type, please feel free to just type in your review in the text box and select the star ratings.
+
+- Then, click on the orange ‘Submit your Review’ button.
+Then, click on the orange ‘Submit your Review’ button.
+
+- Once you’ve submitted your review, it may take up to 5 business days for it to appear on the site.
+Once you’ve submitted your review, it may take up to 5 business days for it to appear on the site.
+
+- Please visit our Review Guidelines and Terms of Use to review the legal terms and conditions concerning your submission of reviews.
+Please visit our Review Guidelines and Terms of Use to review the legal terms and conditions concerning your submission of reviews.
+
+### How do I unsubscribe from any of your mailing lists?
+
+There are two quick and easy ways to unsubscribe from our mailing list:
+Call us at tel:18009277671 and one of our customer service representatives will take care of your request over the phone.
+
+Text CHAT to tel:18773624126 to chat with Zappos Customer Service by text.
+
+By texting CHAT, you consent to receive text messages (including automated and marketing messages) from or on behalf of Zappos at your mobile number provided. Consent is not a condition of any purchase. Text STOP to end your chat. Message & data rates may apply.
+
+### How do I use my Gift Certificate/Coupon Code?
+
+Using your code is as easy as 1-2-3!
+
+Place all of the items in your shopping cart and proceed to checkout.
+Under Your Payment Information, find the box labeled "Redeem Gift Cards and Coupons".
+Enter your code in the box and click "Apply".
+
+### I tried to check out and the item in my shopping cart disappeared, what happened?
+
+We are sorry that you were not able to complete your order. The selection on Zappos.com is live and reflects what is in stock at that moment. Placing an item in your shopping cart does not guarantee your right to purchase that item. Until you have completed the checkout process, another customer may purchase the item even if it is in your cart.If that happens, you will receive a message on the shopping cart page informing you that the item is no longer available and that you should remove it from your cart.
+
+### Is the item I want going to go on sale soon?
+
+Unfortunately, Zappos.com does not know if an item will go on sale or be marked down until it actually happens. It is possible for different colors within the same style to have different prices. For instance, if a blue bag is selling better than a yellow one, one might discount the yellow bag to boost sales.
+
+### My email address has changed. How do I update this information to my current account?
+
+You are welcome to update your e-mail address by logging in to your account online. The best way to do this is to take the following steps:
+
+- (Mobile only) Tap the menu in the top right corner of the screen.
+(Mobile only) Tap the menu in the top right corner of the screen.
+
+- Select the account icon and sign in with your Zappos, Amazon, or Google credentials (email & password).
+Select the account icon and sign in with your Zappos, Amazon, or Google credentials (email & password).
+
+- From the account icon menu, choose "Account Overview."
+From the account icon menu, choose "Account Overview."
+
+- In the Account Overview page, you can manage shipping addresses, payment methods, security information, order history, and pending orders.
+In the Account Overview page, you can manage shipping addresses, payment methods, security information, order history, and pending orders.
+
+- To update name, email, or password, select "Manage Account Info" and choose "Edit" next to the information you want to change.
+To update name, email, or password, select "Manage Account Info" and choose "Edit" next to the information you want to change.
+
+- Type your new e-mail address in "New email address" and "Re-enter new email".
+Type your new e-mail address in "New email address" and "Re-enter new email".
+
+- Type in your current password in "Password".
+Type in your current password in "Password".
+
+- Click "Save Changes".
+Click "Save Changes".
+
+Also, we would be happy to update your e-mail address for you over the phone. For security purposes, we ask that you call Zappos Customer Service at 1-800-927-7671 to confirm your account information. Upon verification, we will be glad to take care of your request immediately. Please let us know if there is anything else we can help you with.
+
+### The item I want is out of stock.  What do I do now?
+
+Zappos.com is very sorry that the item that you need is out of stock. Underneath the size selection dropdown menu, there is a link that says "Don't see your size?". If you click on that link, you will see a popup that will let you add your email address to our notification list. When your size, color, and style become available you will receive an automated email sent by our system letting you know that your item is available for purchase. The notification list does not hold an item for you, and it does not obligate you to make a purchase so you are welcome to shop around while you wait. Items are available on a 'first come, first served' basis, so please make sure that you place your order quickly.
+
+### Do you accept orders through VOIP?
+
+While we are happy to hear from our international customers, we are unable to accept VOIP(voice over internet protocol) calls at this time. We have allowed VOIP calls in the past, however, we found it limited the service we were able to provide. You may call us from any land line or cellular phone at +1 702-943-7677. We apologize for the inconvenience this may cause.
+
+### How do I care for XYZ fabric?
+
+Acetate: While most items made of acetate are dry-clean only, some may be hand-washed in lukewarm water. Do not twist the fabric. Iron while the fabric is damp. Press the inside of the garment using a low-temperature setting. Use a pressing cloth when ironing the outside.
+
+Acrylic knit: Most acrylic knit garments can be machine-washed. Read the label, and check for the proper drying option. Some knits retain their shapes best if reshaped and dried flat.
+
+Cashmere: Check the care label before laundering cashmere. To hand-wash, use a mild detergent or shampoo. Gently squeeze the water through the garment, then rinse until the water runs clear. Do not wring or twist. Squeeze out excess water. To dry, lay flat on a towel, away from sunlight or heat.
+
+Cotton: Cotton holds up well to home laundering. Remove the garment from the dryer promptly to reduce wrinkling. Press using spray starch for the crispness of a laundered shirt.
+
+Cotton blend: Dry cotton-blend garments using your dryer's permanent-press or low-heat cycle, and remove immediately to reduce wrinkling. Touch up with a steam iron; starch for a professionally laundered look.
+
+Linen: Most linen garments need to be dry-cleaned or hand-washed. Follow the instructions on the care label. To touch up or press, use a steam iron on a linen setting for a crisp look.
+
+Nylon: Machine-wash nylon garments in warm water. Use a low-temperature setting when tumble-drying, and include a dryer sheet to reduce static electricity. Use a warm iron to press, if necessary.
+
+Polyester: Read the label. Usually polyester items can be machine-washed (cool) and dried (low). Check the label to see if air-drying is recommended. Touch up with a cool – never hot – iron, if necessary.
+
+Rayon: Make sure to read the care label for rayon clothing. Launder in cool water and a mild detergent. When machine-washing, use the gentle cycle and promptly remove garments after washing. When hand-washing, do not wring or twist the garment. To dry, roll the item in a towel to squeeze out excess water. Lay flat to dry. Iron when still damp and with the garment inside out to prevent the fabric from becoming shiny. Use a pressing cloth when ironing the right side of the garment. Pressing cloths can be purchased, or use something as simple as a piece of white cotton fabric.
+
+Silk: Dry cleaning may be required. Some silks are hand- or machine-washable. Do not dry silk in a clothes dryer. Garments usually look best when professionally dry-cleaned.
+
+Spandex: Use warm water when hand- or machine-washing items made with spandex. Line-dry or use a low temperature setting when machine-drying to preserve the elasticity of the garment.
+
+Wool knit: Typically wool knits need to be dry-cleaned, but check the label. If hand-washable, use cool water and a detergent for fine washables. Squeeze out excess water, then reshape and dry flat.
+
+Wool (lined): Lined garments generally look best when professionally dry-cleaned once a season. Between dry cleanings, remove surface soil with a brush or damp cloth. Refresh the item by hanging it from a padded hanger in a steamy bathroom; moisture will help garment shed wrinkles. When touching up with an iron, use steam in an up-and-down motion (rather than sliding the iron along the fabric).
+
+### What is a Zappos Verified Purchase review?
+
+An "Zappos Verified Purchase" review means we've verified that the person writing the review purchased the product at Zappos.
+Reviews that are not marked "Zappos Verified Purchase" are valuable as well, but we can't confirm that the product was purchased at Zappos.
+
+### Do you ship internationally?
+
+We do not ship to international locations other than U.S. Territories and Military APO/FPO addresses. If you ship items to a Freight Forwarding business, Zappos is only responsible for delivery to that business. Zappos is not responsible for any claims for damage or missing items after successful delivery to the Freight Forwarding business.
+
+### Do you have Guest checkout?
+
+Guest checkout may be available if you don’t have a Zappos account, however, you may need your own Zappos account to use certain Zappos Services.
+
+### Suspicious Activity
+
+### I received an email from Zappos.com regarding an order I didn’t place. What should I do?
+
+If you received correspondence regarding an order you didn’t place, it likely wasn’t from Zappos.com.  Don't share any personal information, click any links in the email, or respond to the email, and delete it immediately.
+
+This type of email is known as a phishing campaign.  A phishing campaign is an email scam designed to steal personal information from victims. Cybercriminals use phishing, the fraudulent attempt to obtain sensitive information such as credit card details and login credentials, by disguising themselves as a trustworthy organization or reputable person in an email communication.
+
+If you are a Zappos.com customer, you can go to your Zappos Account and view Your Order History to see if there is an order that matches the details in the correspondence.  If you are not a Zappos.com customer, feel free to contact us to verify whether the email is associated with an actual order.
+
+### How do I identify whether an Email is or is not from Zappos?
+
+Suspicious or fraudulent emails not from Zappos.com may contain:
+
+- A reference to a payment source that Zappos.com does not accept, such as PayPal.  Zappos.com currently only accepts credit cards, debit cards, and Zappos.com Gift Cards for payment.
+- A request to update payment information that is not linked to an order you placed on Zappos.com or your Zappos.com account.
+- Links, including “Here” links, to websites not affiliated with Zappos.com.  You should be able to hover over a link without clicking it to show the website address associated with the link.  If the link shows a site other than Zappos.com or a site that is not a legitimate Zappos domain, then it is likely phishing.
+- An order confirmation for an item you didn't purchase or an attachment to an order confirmation.  If you are a Zappos.com customer, go to your Zappos Account and view Your Order History to see if there is an order that matches the details in the correspondence. If you are not a Zappos.com customer, feel free to contact us to verify whether the email is associated with an actual order.
+- Typos, grammatical errors, or unconventional formatting.
+- A generic email address with Zappos in the email, for example advert@gmail.com or an email address from a non-US country or site not associated with Zappos. Zappos will never send communications from personal or generic email accounts. Order-related emails typically come from cs-noreply@zappos.com or another zappos.com email address.
+- Forged email addresses to make it look like the email is coming from Zappos.com. Your email program may allow you to hover over or click on an email address to view its original source.
+
+### What should I do if I believe I’ve received a phishing email or if I responded to what may be a phishing email?
+
+If you believe you received a phishing email or responded to what may be a phishing email, Zappos recommends you update your online passwords, including the password to your Zappos.com Account, and report the email to the Federal Trade Commission (FTC).  Visit the FTC website here to report the email and find more information on how to identify and prevent phishing attacks.
+
+### How to Obtain Zappos Transaction Records After Identity Theft
+
+Victims of identity theft, or law enforcement agencies on their behalf, may be entitled to certain records under the Fair Credit Reporting Act ("FCRA").
+
+Victims of Identity Theft
+
+If you have not yet done so, we encourage you to report suspicious activity to Zappos (including unauthorized activity in your Zappos account), by contacting Zappos Customer Service.
+
+If you are a victim of identity theft, you may request, at no charge, copies of records relating to fraudulent transactions that may have occurred at Zappos.
+
+You can make a request using the following methods:
+
+1. If you have a Zappos account, you can access certain information through Account Overview where you can see your Order History , Shipping Information , and Payment Information .
+
+2. Contact Zappos Customer Service by email at cs@support.zappos.com from the email address associated with your Zappos account. Please include the following information in your email:
+
+a. Subject Line: FCRA609 request for account data
+
+b. Your First and Last Name
+
+c. Your current Phone Number
+
+d. Your Billing Address
+
+e. Any additional information you feel is relevant
+
+3. If you don't have a Zappos account, can't access your Zappos account or need further records you can submit a written request using the following methods:
+
+By Mail:
+
+Zappos Legal Department
+
+Attn: FCRA Records Requests
+
+1245 E Washington Ave
+
+Madison, WI 53703
+
+United States
+
+Please include the following items:
+
+1. A copy of your government ID, such as a driver's license
+
+2. A copy of a police report concerning the identity theft or a government-issued Identity Theft Report available at IdentityTheft.gov
+
+3. Relevant details about the fraudulent transaction (for example, a transaction ID from your statements or the date of the transaction, if you know)
+
+4. A mailing address where we can send you copies of records, AND an email address or phone number where we can contact you if we have any questions.
+
+We'll fulfill your request within 30 days, unless we need more information from you or as otherwise permitted by law.
+
+### Payment Information
+
+### Do you accept international credit cards?
+
+Currently Zappos.com can accept international credit cards but we can only ship to an address within the United States and its territories. Please note that the credit card must be issued and contain a logo from either Visa, Mastercard, Discover, or American Express.
+On the checkout page, there will be a billing and shipping section. Please do the following:
+
+For the billing information
+
+Enter your street address on Address Line 1.
+Enter your City, County or Province, and Postal Code on Address Line 2.
+Enter your Country  for the city.
+Enter AA for the state.
+Enter 11111 for the zip code.
+
+For the shipping information
+
+Please enter the correct information in the appropriate field.
+
+Orders placed with the use of an International Credit Card may take up to 72 hours to finalize prior to shipping. We apologize for any inconvenience this may cause.
+
+### Do you allow Cashier's Checks or Money Orders?
+
+No. At this time Zappos.com does not accept Cashier's Checks or Money Orders.
+
+### Do you charge sales tax on any item?
+
+For information on how sales tax is charged, please see the Zappos State Sales Tax page.
+
+### What forms of payment do you accept?
+
+Zappos.com currently accepts Visa, MasterCard, Discover, and American Express for all orders.
+
+### What can cause my order to be delayed?
+
+- If the billing information you provided does not match what your bank has on file (including address and telephone number), your order may be delayed.
+- We all love sending gifts to others and ourselves as much as we love receiving them. However, if you are shipping to an address other than your billing address, your order may be delayed.
+
+### Can I pay with multiple Visa, Mastercard, American Express, or Discover Pre-Paid Gift Cards?
+
+Any pre-paid gift card with a Visa, Mastercard, American Express, or Discover logo / insignia on it will be processed like an actual credit / debit card and only one credit card can be used per order. If a single pre-gift card does not cover the total of your order, we suggest using the balance on the pre-paid gift card to purchase a Zappos Gift Certificate. The Zappos Gift Certificate can then be used along with a credit card or pre-paid gift card to complete the order. If you have multiple pre-paid gift cards, you will need to purchase a separate Zappos Gift Certificate for each. If you need any help with purchasing the Zappos Gift Certificates or placing an order, please give Zappos Customer Service a call, and we will be happy to help!
+Please also note that in order to use the pre-paid gift card on Zappos, it will need to be registered or activated by following the instructions on the pre-paid gift card itself or on the card’s packaging. Also, some card may not be eligible for online purchases. Please refer to the company that issued the card for more details.
+
+### Amazon Pay
+
+### What is Amazon Pay?
+
+Amazon Pay is a service that allows Amazon customers to use the payment information already stored in their Amazon account to pay for goods and services on other sites. You can use Amazon Pay wherever you see it - whether that is clicking the Amazon Pay button when checking out on your favorite online stores, managing your payment methods in your account on Amazon.com or using Amazon Pay on Alexa. There are no additional sign-ups or sign-ins. Your transactions are safe and secure, and everything can be tracked in your Amazon account.
+
+### How do I open an Amazon Pay account?
+
+If you have an Amazon account, you are ready to start using Amazon Pay wherever you see the Amazon Pay button. No additional registration is necessary, which means you don’t need to create a new account or remember old passwords. Amazon Pay simply uses the information and payment methods stored in your Amazon account. That also includes your address book, so you’ll always have Grandmom’s address handy no matter where you shop.
+
+### How do I find my Amazon Pay transactions?
+
+Go to pay.amazon.com and sign in as a “shopper” using your Amazon username and password. One-time purchases are shown on the “Activity” tab, and subscription agreements are on the “Merchant agreements” tab. You can also view your transactions on Amazon.com. If you are on a desktop, your Amazon Pay transactions can be found under “Amazon Orders” within the Amazon Pay tab or in “Your Account” under “Transactions”. If you are in the Amazon app, all transactions are listed together under “Your Orders” or in “Your Account”.
+
+### What does it cost to use Amazon Pay?
+
+It costs nothing. Using Amazon Pay does not add fees to your purchases on sites and organizations accepting Amazon Pay. Amazon Pay does not add transaction fees, membership fees, currency conversion fees, foreign transaction fees, or any other fees. Your card issuer, however, may add a foreign transaction fee if your card was issued in a country different from the site on which you are shopping, as well as any other fees described in the terms and conditions for your card.
+
+### Paypal
+
+### What is PayPal?
+
+PayPal is an online payment system that makes paying for things online and sending and receiving money safe and secure. When you link your bank account, credit card or debit card to your PayPal account, you can use PayPal to make purchases online with participating stores.
+
+### How do I place my order using PayPal?
+
+Simply add the items you would like to purchase to your cart, proceed to checkout and choose the PayPal option as your payment method.  You will then be directed to PayPal to confirm your shipping and payment details (“PayPal flow”).   You must then go back and complete your order by clicking the “place your order” button on Zappos.
+
+### What happens after my order has been placed using PayPal?
+
+You will receive an email from PayPal which indicates an “order has been submitted but the money won’t leave your account until Zappos processes your order”.  Once your order has been processed, you will receive a shipping confirmation from Zappos. Your order will not be processed until you click the “place your order” button on Zappos.
+
+### I received an email from PayPal indicating that my order has been submitted but I didn’t receive an order confirmation from Zappos, what does this mean?
+
+Please check your order history.  If the order wasn’t actually completed on Zappos there won’t be an order in your Zappos account history.  You will see a pending order on your PayPal account activity but this pending order will drop off your PayPal account activity after 30 days.
+
+### How can I re-place an order that didn’t process correctly (e.g., in the scenario above)?
+
+Please follow the instructions in the “How do I place my order using PayPal” FAQ, making sure to complete your order by clicking the “place your order” button on Zappos.
+
+### Is PayPal available on the Zappos App?
+
+Unfortunately, PayPal is only available on the Zappos desktop and mobile web.  We hope to have this functionality in the future, so stay tuned!
+
+### Can I use PayPal with Zappos gift cards and promotion codes?
+
+Yes!  You can use PayPal in combination with a Zappos gift card and promo codes (including VIP Points redemption).
+
+### My order placed with PayPal was declined, now what do I do?
+
+You will have to update the payment method on your order to a credit card that is on file in your Zappos account and resubmit your order.  Unfortunately, you can’t select a new payment method from your PayPal account.
+
+### Can I add items to my order after processing my order through PayPal flow?
+
+Unfortunately, you can’t add items to your order after you have gone through the PayPal flow. This includes adding new items or increasing the quantity of existing items.  You can, however, decrease the quantity of existing items.
+
+### Can I cancel my PayPal order?
+
+Yes, Self Service Cancellations are available in My Account.
+
+### Can I use a combination of PayPal information and Zappos information during checkout?
+
+The shipping address on your PayPal account must be the same address you are shipping your order to.  Unfortunately, you cannot choose an address from your Zappos account that is different from the address in your PayPal account.
+
+### Technology
+
+### What are cookies? Do I need to enable cookies on my browser?
+
+A cookie is a small amount of data that is sent to your browser from a web site and is stored on your computer's hard drive. If your browser's preferences allow it (most browsers are installed with cookies enabled), each web site can send its own cookie to your browser. To protect your privacy, cookies do not store personal information but instead use anonymous unique identifiers. Each web site can only access the cookie they have sent to your hard drive, not the cookies sent by other web sites.
+
+You need to enable cookies on your browser to enjoy all the shopping features on Zappos.com. Cookies need to be enabled on your browser so you can add products to your shopping cart and to access your account information. If you share your computer with others and you do not want them to have access to your account information, be sure to log out before leaving your computer unattended. You can log out by clicking on the Logout link at the top of the page.
+
+For more information about how we use cookies, See Our Privacy Policy .
+
+### When placing an order I get an error message stating that there has been an authorization failure. What went wrong?
+
+Please double check the credit card number and expiration date on your card. Also, please be aware that Zappos.com currently accepts Visa, MasterCard, Discover, and American Express for credit card payment.
+
+### About
+
+### Are there any benefits to having an account with you?
+
+With your Zappos.com account, you will have access to the following information:
+
+- Your Account Information
+Your Account Information
+
+- Your Order History
+Your Order History
+
+- Process a Return
+Process a Return
+
+- Your Wish List
+Your Wish List
+
+- Your Email Subscriptions
+Your Email Subscriptions
+
+- Your Coupons and Gift Cards
+Your Coupons and Gift Cards
+
+### How can I get assistance if I need it?
+
+Three Quick and Easy Solutions - We're Here to Help You!
+
+Call Zappos Customer Service: We are here for you 24/7 tel:18009277671
+
+Text CHAT to: tel:18773624126 to chat with Zappos Customer Service by text.
+
+By texting CHAT, you consent to receive text messages (including automated and marketing messages) from or on behalf of Zappos at your mobile number provided. Consent is not a condition of any purchase. Text STOP to end your chat. Message & data rates may apply.
+
+Connect With Live Help: Ask your question right now with a member of Zappos Customer Service. Go Ahead - Start a Conversation With Now by visiting our https://www.zappos.com/c/contact-us .
+
+### Is there a way I can learn more about the Zappos Family?
+
+We Are a Service Company That Happens to Sell _ _ _ :
+We believe that if we give our customers a great shopping experience, then growth in sales will eventually come on their own. So rather than focusing on maximizing profits, we focus on maximizing the service that we provide.
+We are committed to your complete satisfaction; it is our top priority. In addition to offering a wide variety of merchandise, we strive to provide you with the best service in the industry. Learn more from the links below:
+
+Learn more about Zappos Give us a Shout! Glossary of Terms
+
+### What are your shipping and return policies?
+
+Unlike many other websites that have special rules and lots of fine print, Zappos.com offers free shipping on all orders placed on the website, with no minimum order sizes or special exceptions.
+We believe that in order to have the best possible online shopping experience, our customers should not have to pay for domestic return shipping either. If, for whatever reason, you're not happy with your purchase just complete our easy self-service return process . Your returns back to the warehouse are absolutely free. With our return policy, there are no special catches or exceptions.
+For assistance with your return, please call Zappos Customer Service at 1-800-927-7671.
+
+Zappos.com Shipping and Return Policies Return Instructions
+
+### What kind of selection do you have?
+
+With over 3 million items available, Zappos.com offers one of the best selections anywhere -- online or offline. We add new styles to our site on a daily basis so that our selection is always fresh and up to date.
+Everything In-Stock:If you are able to place an item in your shopping cart, that means that the item is available for immediate shipment. The fulfillment rate is over 99.9% - you can feel confident that if you ordered it, you will receive it.
+
+### Apple Pay
+
+### What is Apple Pay?
+
+Apple Pay is a digital service that makes paying for things online, allowing you to use it in place of a traditional card payment whenever possible through your Apple Wallet. You can use Apple Pay to make purchases online with participating stores and make payments using your Apple Cash, Apple Card, or other credit and debit cards. Apple Pay is Only available to cardholders at participating banks in supported countries.
+
+### How do I place my order using Apple Pay?
+
+Simply set up Apple Pay on your iPhone by adding a debit or credit card to your Wallet app. Add the items you would like to purchase to your cart, proceed to checkout and choose the Apple Pay option as your payment method.  You will review your payment information to confirm your shipping and payment details and choose your payment method.  You must then go back and complete your order by clicking the “place your order” button on Zappos.
+
+### What happens after my order has been placed using Apple Pay?
+
+Apple Pay will send you a notification when you make a purchase with Apple Pay. You can customize your notification settings in your iPhone to receive alerts for purchases made with your Apple Pay card or for purchases that exceed a certain amount. Once your order has been processed, you will receive a shipping confirmation from Zappos.
+
+### Is Apple Pay available on the Zappos App?
+
+Apple Pay is available on the Zappos App and mobile web.
+
+### Can I use Apple Pay with Zappos gift cards and promotion codes?
+
+Yes! You can use Apple Pay in combination with a Zappos gift card and promo codes (including VIP Points redemption).
+
+### My order placed with Apple Pay was declined, now what do I do?
+
+Your Apple Pay purchase may be declined for various reason, including insufficient funds in your bank account, a card that is not eligible for Apple Pay, a temporary card lock, a poor connection with the payment terminal, or if a merchant does not support Apple Pay. You will have to update the payment method on your order to a credit card that is on file in your Zappos account and resubmit your order.  Unfortunately, you can’t select a new payment method for you.
+
+### Can I add items to my order after processing my order through Apple Pay?
+
+Unfortunately, you can’t add items to your order after completing your purchase with Apple Pay. This includes adding new items or increasing the quantity of existing items.
+
+### Can I cancel my Apple Pay order?
+
+Yes, Self Service Cancellations are available in My Account.
+
+### Can I use a combination of Apple Pay information and Zappos information during checkout?
+
+The shipping address on your Apple Pay account must be the same address you are shipping your order to.  Unfortunately, you cannot choose an address from your Zappos account that is different from the address inf your Apple Pay account.
+
+### How long does it take for me to get a refund?
+
+It can take up to 30 days for your return to be inspected and processed for a refund once it is received at our fulfillment center. Returns that do not comply with our return policy may not be eligible for a refund or could result in a restocking fee up to 50% of the item price. In certain circumstances refund time frames may be longer. Once your qualifying return is approved, Zappos will issue your refund. Depending on your method of payment, please allow the additional timeframe for your financial institution to make funds available in your account: Debit or credit cards: up to 10 business days; international cards: up to 30 business days; PayPal transactions: up to 30 business days; AfterPay payments: up to 20 business days; and Zappos gift cards: up to 24 hours.

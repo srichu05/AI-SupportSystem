@@ -1,0 +1,47 @@
+# Source ID: SRC-ZAPPOS-004
+# Title: Get Help: Zappos Customer Service | Zappos.com
+# URL: https://www.zappos.com/c/customer-service
+# Retrieved Date: 2026-10-10
+# Extraction Status: verified
+# Publisher: Zappos.com LLC
+# Document Type: customer_service_hub
+# Intended Use: Grounding 24/7 customer loyalty team contact channels (1-800-927-7671), order tracking status, and 30-day fulfillment center return inspection window.
+# ------------------------------------------------------------
+
+## Get Help: Zappos Customer Service
+
+### Return an Order
+
+Some things don’t work out. No biggie! Sign in to your Zappos account. Navigate to the “My Account” dropdown menu and click the “View Orders / Return Items” link.  Select “Return Item(s), followed by the item(s) you wish to return, and the label & carrier you prefer. Repackage the order and voilà!! You’re ready to print your label or present your QR code for drop-off.
+
+Action: Sign In to Start a Return
+
+### Place an Order
+
+Getting the things you love is easy! Just add the item(s) you would like to purchase to your cart, then select “Proceed to Checkout.” You must sign in or create your Zappos.com account. Then, you can add your payment method and complete your order by clicking the “Place Your Order” button on the checkout screen. Yay!
+
+Action: Sign In to Place an Order
+
+### Order & Tracking Status
+
+We’re excited that you’re excited about your order! All tracking numbers and updates are sent to the email address on your Zappos.com account. Once signed in, you can also view your order status under the “My Account” dropdown menu by clicking the “View Orders / Return Items” link, then selecting the “Show More” button next to your order.
+
+Action: Sign In to View Order Status
+
+### Return & Refund Status
+
+You sent back your order—now what? It can take up to 30 days for your return to be inspected and processed for a refund once it is received at our fulfillment center. Once signed in, you can also view your return & refund status under the "My Account" dropdown menu by clicking the "View Orders / Return Items" link, then selecting the "Show More" button next to your order.
+
+Action: Sign In to View Return Status
+
+### FAQs
+
+Hey, some things need more explanation. We got you! If our most popular inquiries aren’t applicable to you, peruse our FAQs for more specific questions and answers.
+
+Action: Explore Zappos FAQs
+
+### Get More Help
+
+If you can't find what you need, our Customer Loyalty Team is happy to assist. Call us 24/7 at 1-800-927-7671 or visit our Contact Information page for additional options.
+
+Action: Contact Zappos

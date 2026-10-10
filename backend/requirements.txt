@@ -27,3 +27,7 @@ pytest>=8.0.0
 # Document extraction
 pymupdf>=1.24.0
 python-docx>=1.1.0
+
+# Authentication & Cryptography (Clerk JWT Verification)
+pyjwt[crypto]>=2.8.0
+cryptography>=42.0.0

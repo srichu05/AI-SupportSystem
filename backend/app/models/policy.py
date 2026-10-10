@@ -41,7 +41,10 @@ class PolicyDocument(Base):
     __tablename__ = "policy_documents"
 
     id = Column(GUID(), primary_key=True, default=uuid.uuid4)
+    source_id = Column(String(50), nullable=True, index=True)
     source_filename = Column(String(255), nullable=False)
+    canonical_url = Column(String(1024), nullable=True)
+    content_hash = Column(String(64), nullable=True)
     storage_path = Column(String(1024), nullable=True)
     document_type = Column(String(20), nullable=False)  # PDF, DOCX, TXT
     version_label = Column(String(50), nullable=True)

@@ -273,6 +273,76 @@ def create_complaint(
 
 
 @router.get(
+    "",
+    response_model=List[ComplaintResponse],
+    summary="List complaints and their current review status",
+)
+def list_complaints(
+    limit: int = 50,
+    offset: int = 0,
+    current_agent: AgentProfile = Depends(get_current_agent),
+) -> List[ComplaintResponse]:
+    """
+    List complaints and their current review status.
+    Protected by Clerk authentication.
+    """
+    factory = get_session_factory()
+    results: List[ComplaintResponse] = []
+    if factory is not None:
+        try:
+            with factory() as db:
+                complaints = (
+                    db.query(Complaint)
+                    .order_by(Complaint.created_at.desc())
+                    .offset(offset)
+                    .limit(limit)
+                    .all()
+                )
+                for comp in complaints:
+                    latest_draft = (
+                        db.query(ResponseDraft)
+                        .filter(ResponseDraft.complaint_id == comp.id)
+                        .order_by(ResponseDraft.created_at.desc())
+                        .first()
+                    )
+                    draft_resp = None
+                    if latest_draft:
+                        so = latest_draft.structured_output or {}
+                        draft_resp = DraftResponse(
+                            draft_id=str(latest_draft.id),
+                            text=latest_draft.draft_text,
+                            citations=so.get("citations", []),
+                        )
+
+                    results.append(
+                        ComplaintResponse(
+                            complaint_id=str(comp.id),
+                            status=comp.processing_status,
+                            issues=[
+                                ComplaintIssueResponse(
+                                    issue_id=str(iss.id),
+                                    issue_text=iss.issue_text,
+                                    requested_resolution=iss.requested_resolution,
+                                    assessment_status=iss.assessment_status,
+                                    missing_facts=iss.missing_facts or [],
+                                    evidence=[],
+                                )
+                                for iss in comp.issues
+                            ],
+                            draft=draft_resp,
+                            validation=ValidationReport(valid=True, errors=[], warnings=[]),
+                            created_by_agent_id=str(comp.created_by_agent_id) if comp.created_by_agent_id else None,
+                            created_by_agent_name=comp.created_by.display_name if comp.created_by else None,
+                            assigned_to_agent_id=str(comp.assigned_to_agent_id) if comp.assigned_to_agent_id else None,
+                            assigned_to_agent_name=comp.assigned_to.display_name if comp.assigned_to else None,
+                        )
+                    )
+        except Exception as exc:
+            logger.error("Failed to list complaints: %s", exc)
+    return results
+
+
+@router.get(
     "/{complaint_id}",
     response_model=ComplaintResponse,
     summary="Retrieve complaint details and review status",

@@ -252,6 +252,7 @@ def create_development_complaints_csv():
         "expected_action",
         "expected_escalation",
         "notes",
+        "provenance_type",
     ]
 
     complaints_data = [
@@ -422,6 +423,9 @@ def create_development_complaints_csv():
             "notes": "Covered by Conditions of Use: 'If a product offered by Zappos was not as described, your sole remedy is to return it in unused condition.'",
         },
     ]
+
+    for c in complaints_data:
+        c["provenance_type"] = "synthetic"
 
     with open(complaints_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
