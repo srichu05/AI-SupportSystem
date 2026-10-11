@@ -1,6 +1,5 @@
 # API Specification Contract (v1.0.0)
 ## Project: PolicyPulse AI — Intelligent Customer Complaint Response Assistant
-**Team**: TENSOR TITANS | PS-40
 
 ---
 

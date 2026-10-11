@@ -1,6 +1,5 @@
 # PolicyPulse AI
 > **Intelligent Customer Complaint Response Assistant Grounded in Enterprise Policy**  
-> **Team**: TENSOR TITANS | **Problem Statement**: PS-40 (CBC 2.0 Hackathon)
 
 [![Stack](https://img.shields.io/badge/Stack-React%20%7C%20Vite%20%7C%20TypeScript%20%7C%20TailwindCSS-blue)](#)
 [![Backend](https://img.shields.io/badge/Backend-Python%20%7C%20FastAPI%20%7C%20Pydantic-green)](#)
@@ -148,7 +147,7 @@ API Documentation (Swagger UI) is available at **`http://localhost:8000/docs`**.
 
 ---
 
-## 6. Hackathon Deliverable Status (PS-40)
+## 6. Project Deliverable Status
 - [x] Documentation complete (`PRD.md`, `ARCHITECTURE.md`, `API_SPEC.md`, `DATABASE_SCHEMA.md`, `RAG_PIPELINE.md`, `SAFETY_AND_VALIDATION.md`, `TESTING_AND_EVALUATION.md`, `DEPLOYMENT.md`).
 - [x] Landing page reflecting MotionSites visual language and design reference.
 - [x] Functional Agent Review Studio with multi-issue decomposition and side-by-side evidence inspection.

@@ -311,17 +311,12 @@ export const CrowdCanvas: React.FC<CrowdCanvasProps> = ({
 
 export const Footer: React.FC<FooterProps> = ({ onLaunchStudio }) => {
   return (
-    <footer className="relative w-full bg-[#0D0F12] overflow-hidden pt-24 sm:pt-32 pb-8 border-t border-[#292E36]/40">
+    <footer className="relative w-full bg-[#0D0F12] overflow-hidden pt-24 sm:pt-32 pb-0 border-t border-[#292E36]/40">
       {/* Background Subtle Ambience Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-[#8BA7D9]/5 blur-[120px] pointer-events-none" />
 
       {/* Main Section Content Stack */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Eyebrow */}
-        <span className="text-[11px] font-mono uppercase tracking-widest text-[#9299A5] block mb-4">
-          TENSOR TITANS · PS-40
-        </span>
-
         {/* Main Heading */}
         <h2
           className="text-3xl sm:text-5xl lg:text-6xl text-[#E8EAED] tracking-tight mb-5 max-w-3xl font-normal leading-[1.12]"
@@ -367,21 +362,6 @@ export const Footer: React.FC<FooterProps> = ({ onLaunchStudio }) => {
 
         {/* Bottom Ground Line Accent */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-[#292E36]/60 z-10" />
-      </div>
-
-      {/* Minimal Integrated Footer Attribution Bar */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-[#9299A5]">
-        <div className="flex items-center gap-2">
-          <span className="text-[#E8EAED] font-medium">PolicyPulse AI</span>
-          <span>•</span>
-          <span>Human-in-the-Loop Case Management</span>
-        </div>
-
-        <div className="flex items-center gap-4 text-[#9299A5]/70">
-          <span>TENSOR TITANS · PS-40</span>
-          <span>•</span>
-          <span>© 2026 PolicyPulse</span>
-        </div>
       </div>
     </footer>
   );
