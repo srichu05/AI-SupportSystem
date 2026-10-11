@@ -74,3 +74,6 @@ logs/
 Thumbs.db
 Desktop.ini
 
+# Frontend
+!frontend/src/lib/
+!frontend/src/lib/**
