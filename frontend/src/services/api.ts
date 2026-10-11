@@ -8,7 +8,31 @@ import {
 } from '../types';
 import { MOCK_TICKETS } from '../data/mockData';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/v1';
+/**
+ * Normalizes the API base URL to ensure the `/api/v1` prefix is always present,
+ * avoiding duplication or omission regardless of whether VITE_API_BASE_URL is configured as:
+ * - https://example.onrender.com
+ * - https://example.onrender.com/
+ * - https://example.onrender.com/api
+ * - https://example.onrender.com/api/v1
+ * - https://example.onrender.com/api/v1/
+ */
+export const normalizeApiBaseUrl = (rawUrl?: string): string => {
+  const fallback = 'http://127.0.0.1:8000/api/v1';
+  if (!rawUrl || !rawUrl.trim()) {
+    return fallback;
+  }
+  const trimmed = rawUrl.trim().replace(/\/+$/, '');
+  if (trimmed.endsWith('/api/v1')) {
+    return trimmed;
+  }
+  if (trimmed.endsWith('/api')) {
+    return `${trimmed}/v1`;
+  }
+  return `${trimmed}/api/v1`;
+};
+
+export const API_BASE_URL = normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL);
 
 export interface BackendStatus {
   isLive: boolean;
