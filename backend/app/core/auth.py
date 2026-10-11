@@ -23,9 +23,13 @@ _jwks_client: Optional[PyJWKClient] = None
 
 
 def get_jwks_url() -> Optional[str]:
-    """Resolve JWKS URL from explicit config or publishable key."""
+    """Resolve JWKS URL from explicit config, issuer, or publishable key."""
     if settings.CLERK_JWKS_URL:
-        return settings.CLERK_JWKS_URL
+        return settings.CLERK_JWKS_URL.strip()
+
+    if settings.CLERK_ISSUER:
+        issuer = settings.CLERK_ISSUER.strip().rstrip("/")
+        return f"{issuer}/.well-known/jwks.json"
 
     if settings.CLERK_PUBLISHABLE_KEY:
         try:
@@ -33,15 +37,64 @@ def get_jwks_url() -> Optional[str]:
             # Clerk publishable keys format: pk_test_<base64_encoded_domain>$ or pk_live_...
             prefix = "pk_test_" if pub_key.startswith("pk_test_") else "pk_live_" if pub_key.startswith("pk_live_") else ""
             if prefix:
-                encoded = pub_key[len(prefix):].rstrip("$")
+                encoded = pub_key[len(prefix):]
                 # Pad if needed
                 padded = encoded + "=" * (-len(encoded) % 4)
-                domain = base64.b64decode(padded).decode("utf-8")
+                domain = base64.b64decode(padded).decode("utf-8").strip().rstrip("$")
                 return f"https://{domain}/.well-known/jwks.json"
         except Exception as exc:
             logger.warning("Could not derive JWKS URL from CLERK_PUBLISHABLE_KEY: %s", exc)
 
     return None
+
+
+def get_clerk_issuer() -> Optional[str]:
+    """Resolve expected Clerk issuer URL from explicit config, JWKS URL, or publishable key."""
+    if settings.CLERK_ISSUER:
+        return settings.CLERK_ISSUER.strip().rstrip("/")
+
+    if settings.CLERK_JWKS_URL:
+        url = settings.CLERK_JWKS_URL.strip()
+        idx = url.find("/.well-known")
+        if idx != -1:
+            return url[:idx].rstrip("/")
+
+    if settings.CLERK_PUBLISHABLE_KEY:
+        try:
+            pub_key = settings.CLERK_PUBLISHABLE_KEY.strip()
+            prefix = "pk_test_" if pub_key.startswith("pk_test_") else "pk_live_" if pub_key.startswith("pk_live_") else ""
+            if prefix:
+                encoded = pub_key[len(prefix):]
+                padded = encoded + "=" * (-len(encoded) % 4)
+                domain = base64.b64decode(padded).decode("utf-8").strip().rstrip("$")
+                return f"https://{domain}"
+        except Exception:
+            pass
+
+    return None
+
+
+def format_pem_public_key(raw_key: Optional[str]) -> Optional[str]:
+    """Clean, unescape, and structure PEM public key from environment variable."""
+    if not raw_key or not raw_key.strip():
+        return None
+    key = raw_key.strip().strip("'\"")
+    # Replace literal escaped newlines with real newlines
+    key = key.replace("\\n", "\n").replace("\\r", "\r")
+
+    header = "-----BEGIN PUBLIC KEY-----"
+    footer = "-----END PUBLIC KEY-----"
+    if header in key and footer in key:
+        start = key.find(header) + len(header)
+        end = key.find(footer)
+        body = "".join(key[start:end].split())
+        lines = [body[i:i + 64] for i in range(0, len(body), 64)]
+        return f"{header}\n" + "\n".join(lines) + f"\n{footer}"
+
+    # If raw base64 without headers
+    clean_body = "".join(key.split())
+    lines = [clean_body[i:i + 64] for i in range(0, len(clean_body), 64)]
+    return f"{header}\n" + "\n".join(lines) + f"\n{footer}"
 
 
 def get_jwks_client() -> Optional[PyJWKClient]:
@@ -63,8 +116,8 @@ class ClerkTokenVerifier:
         """
         Verify Clerk JWT token signature, expiration, issuer, and authorized party.
         Supports:
-        1. PEM public key (CLERK_JWT_KEY)
-        2. Remote JWKS endpoint (CLERK_JWKS_URL or derived)
+        1. Remote JWKS endpoint (CLERK_JWKS_URL, CLERK_ISSUER, or derived from CLERK_PUBLISHABLE_KEY) [Preferred]
+        2. PEM public key (CLERK_JWT_KEY)
         3. Test / development bypass tokens for isolated unit testing
         """
         if not token:
@@ -86,6 +139,7 @@ class ClerkTokenVerifier:
             )
 
         alg = unverified_headers.get("alg", "RS256")
+        expected_issuer = get_clerk_issuer()
 
         # 2. Support explicit test tokens in non-production environments
         if (
@@ -102,46 +156,18 @@ class ClerkTokenVerifier:
                 )
             return unverified_claims
 
-        # 3. Verify signature using PEM Public Key if configured
-        if settings.CLERK_JWT_KEY:
+        # 3. Verify signature using PyJWKClient (JWKS) - Preferred approach
+        jwks = get_jwks_client()
+        jwks_error: Optional[Exception] = None
+        if jwks:
             try:
-                public_key = settings.CLERK_JWT_KEY.strip()
-                if not public_key.startswith("-----BEGIN"):
-                    public_key = f"-----BEGIN PUBLIC KEY-----\n{public_key}\n-----END PUBLIC KEY-----"
-
+                signing_key = jwks.get_signing_key_from_jwt(token)
                 kwargs: Dict[str, Any] = {
                     "algorithms": [alg],
                     "options": {"verify_aud": False},
                 }
-                if settings.CLERK_ISSUER:
-                    kwargs["issuer"] = settings.CLERK_ISSUER
-
-                payload = jwt.decode(token, public_key, **kwargs)
-                return payload
-            except jwt.ExpiredSignatureError:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Authentication token has expired.",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-            except PyJWTError as exc:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail=f"Invalid token signature: {exc}",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-
-        # 4. Verify signature using PyJWKClient (JWKS)
-        jwks = get_jwks_client()
-        if jwks:
-            try:
-                signing_key = jwks.get_signing_key_from_jwt(token)
-                kwargs = {
-                    "algorithms": [alg],
-                    "options": {"verify_aud": False},
-                }
-                if settings.CLERK_ISSUER:
-                    kwargs["issuer"] = settings.CLERK_ISSUER
+                if expected_issuer:
+                    kwargs["issuer"] = expected_issuer
 
                 payload = jwt.decode(token, signing_key.key, **kwargs)
 
@@ -160,19 +186,66 @@ class ClerkTokenVerifier:
                     detail="Authentication token has expired.",
                     headers={"WWW-Authenticate": "Bearer"},
                 )
-            except PyJWTError as exc:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail=f"Token verification failed against Clerk JWKS: {exc}",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
+            except HTTPException:
+                raise
             except Exception as exc:
-                logger.error("JWKS client error: %s", exc)
+                logger.warning("JWKS verification error: %s", exc)
+                jwks_error = exc
+
+        # 4. Verify signature using PEM Public Key if configured
+        if settings.CLERK_JWT_KEY:
+            try:
+                public_key = format_pem_public_key(settings.CLERK_JWT_KEY)
+                if not public_key:
+                    raise PyJWTError("Could not parse the provided public key.")
+
+                kwargs = {
+                    "algorithms": [alg],
+                    "options": {"verify_aud": False},
+                }
+                if expected_issuer:
+                    kwargs["issuer"] = expected_issuer
+
+                payload = jwt.decode(token, public_key, **kwargs)
+
+                # Validate authorized party if specified
+                if settings.CLERK_AUTHORIZED_PARTY and payload.get("azp"):
+                    if payload["azp"] != settings.CLERK_AUTHORIZED_PARTY:
+                        raise HTTPException(
+                            status_code=status.HTTP_403_FORBIDDEN,
+                            detail="Token authorized party mismatch.",
+                        )
+
+                return payload
+            except jwt.ExpiredSignatureError:
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Failed to verify token with authentication provider.",
+                    detail="Authentication token has expired.",
                     headers={"WWW-Authenticate": "Bearer"},
                 )
+            except HTTPException:
+                raise
+            except PyJWTError as exc:
+                logger.warning("PEM key verification error: %s", exc)
+                if jwks_error:
+                    raise HTTPException(
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail=f"Token verification failed against Clerk JWKS ({jwks_error}) and PEM key ({exc}).",
+                        headers={"WWW-Authenticate": "Bearer"},
+                    )
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail=f"Invalid token signature: {exc}",
+                    headers={"WWW-Authenticate": "Bearer"},
+                )
+
+        # If JWKS was attempted but failed, and no PEM key was configured
+        if jwks_error:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=f"Token verification failed against Clerk JWKS: {jwks_error}",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
 
         # 5. In local development sandbox mode with unconfigured keys, fallback to decoding payload
         if not settings.is_clerk_configured and settings.ENVIRONMENT in ("development", "testing"):
